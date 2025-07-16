@@ -24,4 +24,14 @@ testExamples("parseChar", [
 			parsed: "a",
 		},
 	},
+	{
+		name: "match 2nd",
+		parser: parseChar("a"),
+		input: "ba",
+		fromIndex: 1,
+		result: {
+			consumed: 1,
+			parsed: "a",
+		},
+	},
 ]);
