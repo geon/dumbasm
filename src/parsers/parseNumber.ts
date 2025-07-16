@@ -11,7 +11,9 @@ export type ParsedNumber = {
 export const parseNumber = parseDigits("dec");
 
 function parseDigits(format: ParsedNumber["format"]): Parser<ParsedNumber> {
-	const base = 10;
+	const base = {
+		dec: 10,
+	}[format];
 
 	return parseMonad(parseOneOrMore(parseDigit(base)), (digits) => ({
 		format,
