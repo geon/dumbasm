@@ -1,0 +1,15 @@
+import { parseOneOrMore } from "../parseOneOrMore.js";
+import { parseChar } from "../parseChar.js";
+import { testExamples } from "./testExamples.js";
+
+testExamples<readonly string[]>("parseOneOrMore", [
+	{
+		name: "match",
+		parser: parseOneOrMore(parseChar("a")),
+		input: "aabc",
+		result: {
+			consumed: 2,
+			parsed: ["a", "a"],
+		},
+	},
+]);
