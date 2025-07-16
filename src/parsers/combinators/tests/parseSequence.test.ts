@@ -18,4 +18,13 @@ testExamples("parseSequence", [
 		input: "abc",
 		result: undefined,
 	},
+	{
+		name: "match",
+		parser: parseSequence([parseChar("a")]),
+		input: "abc",
+		result: {
+			consumed: 1,
+			parsed: ["a"],
+		},
+	},
 ]);
