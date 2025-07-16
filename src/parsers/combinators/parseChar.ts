@@ -5,7 +5,14 @@ export function parseChar<Char extends string>(char: Char): Parser<Char> {
 		throw new Error(`Not a char: ${char}`);
 	}
 
-	return (_input, _fromIndex) => {
-		return undefined;
+	return (input, _fromIndex) => {
+		if (!(input[0] === char)) {
+			return undefined;
+		}
+
+		return {
+			consumed: 1,
+			parsed: char,
+		};
 	};
 }

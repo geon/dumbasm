@@ -15,4 +15,13 @@ testExamples("parseChar", [
 		input: "b",
 		result: undefined,
 	},
+	{
+		name: "match",
+		parser: parseChar("a"),
+		input: "a",
+		result: {
+			consumed: 1,
+			parsed: "a",
+		},
+	},
 ]);
