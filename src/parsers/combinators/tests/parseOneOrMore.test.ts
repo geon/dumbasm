@@ -12,4 +12,10 @@ testExamples<readonly string[]>("parseOneOrMore", [
 			parsed: ["a", "a"],
 		},
 	},
+	{
+		name: "no match",
+		parser: parseOneOrMore(parseChar("b")),
+		input: "abc",
+		result: undefined,
+	},
 ]);

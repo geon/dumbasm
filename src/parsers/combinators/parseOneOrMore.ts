@@ -13,6 +13,10 @@ export function parseOneOrMore<T>(parser: Parser<T>): Parser<readonly T[]> {
 			parsed.push(parseResult.parsed);
 		}
 
+		if (parsed.length === 0) {
+			return undefined;
+		}
+
 		return {
 			consumed,
 			parsed,
