@@ -11,8 +11,10 @@ export type ParsedNumber = {
 export const parseNumber = parseDigits();
 
 function parseDigits(): Parser<ParsedNumber> {
-	return parseMonad(parseOneOrMore(parseDigit(10)), (digits) => ({
+	const base = 10;
+
+	return parseMonad(parseOneOrMore(parseDigit(base)), (digits) => ({
 		format: "dec",
-		value: parseInt(digits.join(""), 10),
+		value: parseInt(digits.join(""), base),
 	}));
 }
