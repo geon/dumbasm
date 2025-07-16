@@ -27,4 +27,13 @@ testExamples("parseSequence", [
 			parsed: ["a"],
 		},
 	},
+	{
+		name: "matches",
+		parser: parseSequence([parseChar("a"), parseChar("b"), parseChar("c")]),
+		input: "abc",
+		result: {
+			consumed: 3,
+			parsed: ["a", "b", "c"],
+		},
+	},
 ]);
