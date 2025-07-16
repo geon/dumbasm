@@ -6,7 +6,9 @@ import type { Parser } from "./combinators/Parser.js";
 export const parseNumber = parseDigits();
 
 function parseDigits(): Parser<number> {
-	return parseMonad(parseOneOrMore(parseDigit(10)), (digits) =>
-		parseInt(digits.join(""), 10),
+	const base = 10;
+
+	return parseMonad(parseOneOrMore(parseDigit(base)), (digits) =>
+		parseInt(digits.join(""), base),
 	);
 }
