@@ -23,4 +23,9 @@ testExamples("parseIdentifier", [
 		parser: parseIdentifier,
 		result: createParseError(0, "Expected an identifier"),
 	},
+	{
+		input: "x",
+		parser: parseIdentifier,
+		result: createParseResult(1, "x"),
+	},
 ]);
