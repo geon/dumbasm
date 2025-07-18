@@ -8,4 +8,15 @@ testExamples("parseNumber", [
 		parser: parseNumber,
 		result: undefined,
 	},
+	{
+		input: "123",
+		parser: parseNumber,
+		result: {
+			consumed: 3,
+			parsed: {
+				format: "dec",
+				value: 123,
+			},
+		},
+	},
 ]);
