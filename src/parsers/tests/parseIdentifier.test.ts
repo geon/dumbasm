@@ -7,4 +7,12 @@ testExamples("parseIdentifier", [
 		parser: parseIdentifier,
 		result: undefined,
 	},
+	{
+		input: "hello world",
+		parser: parseIdentifier,
+		result: {
+			consumed: 5,
+			parsed: "hello",
+		},
+	},
 ]);
