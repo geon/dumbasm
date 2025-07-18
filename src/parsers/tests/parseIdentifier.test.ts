@@ -16,4 +16,12 @@ testExamples("parseIdentifier", [
 			parsed: "hello",
 		},
 	},
+	{
+		input: "numberSuffix123",
+		parser: parseIdentifier,
+		result: {
+			consumed: 15,
+			parsed: "numberSuffix123",
+		},
+	},
 ]);
