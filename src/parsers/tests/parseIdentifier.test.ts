@@ -28,4 +28,12 @@ testExamples("parseIdentifier", [
 		parser: parseIdentifier,
 		result: undefined,
 	},
+	{
+		input: "x",
+		parser: parseIdentifier,
+		result: {
+			consumed: 1,
+			parsed: "x",
+		},
+	},
 ]);
