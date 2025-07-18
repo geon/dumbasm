@@ -29,4 +29,12 @@ testExamples("parseIdentifier", [
 		parser: parseIdentifier,
 		result: failParsing(),
 	},
+	{
+		input: "x",
+		parser: parseIdentifier,
+		result: {
+			consumed: 1,
+			parsed: "x",
+		},
+	},
 ]);
