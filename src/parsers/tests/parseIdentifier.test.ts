@@ -13,4 +13,9 @@ testExamples("parseIdentifier", [
 		parser: parseIdentifier,
 		result: createParseResult(5, "hello"),
 	},
+	{
+		input: "numberSuffix123",
+		parser: parseIdentifier,
+		result: createParseResult(15, "numberSuffix123"),
+	},
 ]);
