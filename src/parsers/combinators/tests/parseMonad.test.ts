@@ -9,4 +9,13 @@ testExamples("parseMonad", [
 		input: "abc",
 		result: undefined,
 	},
+	{
+		name: "match",
+		parser: parseMonad(parseChar("a"), (parsed) => parsed.toUpperCase()),
+		input: "abc",
+		result: {
+			consumed: 1,
+			parsed: "A",
+		},
+	},
 ]);
