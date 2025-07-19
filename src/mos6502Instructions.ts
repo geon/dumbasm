@@ -286,6 +286,22 @@ export const mos6502AddressingModesOfInstructions = {
 type SetType<TSet extends ReadonlySet<unknown>> =
 	TSet extends ReadonlySet<infer T> ? T : never;
 
+export const mos6502AddressingModesInOrderOfSpecificity = Object.values({
+	immediate: "immediate",
+	accumulator: "accumulator",
+	"zeropage,X": "zeropage,X",
+	"zeropage,Y": "zeropage,Y",
+	"absolute,X": "absolute,X",
+	"absolute,Y": "absolute,Y",
+	zeropage: "zeropage",
+	absolute: "absolute",
+	"(indirect,X)": "(indirect,X)",
+	"(indirect),Y": "(indirect),Y",
+	relative: "relative",
+	indirect: "indirect",
+	implied: "implied",
+} as const satisfies { [M in Mos6502AddressingMode]: M });
+
 export type Mos6502AddressingModeOfInstruction<
 	Mnemonic extends Mos6502Mnemonic,
 > = SetType<(typeof mos6502AddressingModesOfInstructions)[Mnemonic]>;
