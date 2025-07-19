@@ -1,6 +1,6 @@
 export function intersperse<TElement, TSeparator>(
 	array: readonly TElement[],
-	_separator: TSeparator,
+	separator: TSeparator,
 ): (TElement | TSeparator)[] {
-	return array.map((element) => element);
+	return array.flatMap((element) => [element, separator]).slice(0, -1);
 }

@@ -11,4 +11,8 @@ suite("intersperse", () => {
 	test("[x]", () => {
 		expect(intersperse(["x"], separator).join("")).toBe("x");
 	});
+
+	test("[x, y, z]", () => {
+		expect(intersperse(["x", "y", "z"], separator).join("")).toBe("x, y, z");
+	});
 });
