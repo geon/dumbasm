@@ -1,3 +1,5 @@
+import { parseAnyChar } from "./parseAnyChar.js";
+import { parseMonad } from "./parseMonad.js";
 import { failParsing, type Parser } from "./Parser.js";
 
 export function parseChar<Char extends string>(char: Char): Parser<Char> {
@@ -5,5 +7,7 @@ export function parseChar<Char extends string>(char: Char): Parser<Char> {
 		throw new Error(`Not a char: "${char}"`);
 	}
 
-	return () => failParsing();
+	return parseMonad(parseAnyChar, (parsed) =>
+		parsed !== char ? failParsing() : char,
+	);
 }
