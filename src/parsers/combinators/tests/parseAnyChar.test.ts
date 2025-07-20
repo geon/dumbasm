@@ -8,4 +8,14 @@ testExamples("parseAnyChar", [
 		input: "",
 		result: undefined,
 	},
+	{
+		name: "match",
+		parser: parseAnyChar,
+		input: "abc",
+		fromIndex: 1,
+		result: {
+			consumed: 1,
+			parsed: "b",
+		},
+	},
 ]);
