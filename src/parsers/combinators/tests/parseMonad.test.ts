@@ -18,4 +18,10 @@ testExamples("parseMonad", [
 			parsed: "A",
 		},
 	},
+	{
+		name: "refused",
+		parser: parseMonad(parseAnyChar, () => undefined),
+		input: "abc",
+		result: undefined,
+	},
 ]);
