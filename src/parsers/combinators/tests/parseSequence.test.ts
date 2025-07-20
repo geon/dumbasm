@@ -23,4 +23,10 @@ testExamples<readonly string[]>("parseSequence", [
 		input: "abc",
 		result: createParseResult(1, ["a"]),
 	},
+	{
+		name: "matches",
+		parser: parseSequence([parseAnyChar, parseAnyChar, parseAnyChar]),
+		input: "abc",
+		result: createParseResult(3, ["a", "b", "c"]),
+	},
 ]);
