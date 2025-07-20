@@ -1,9 +1,10 @@
-import type { Parser } from "./Parser.js";
+import { parseAnyChar } from "./parseAnyChar.js";
+import { parseMonad } from "./parseMonad.js";
 
-export function parseChar<Char extends string>(char: Char): Parser<Char> {
+export function parseChar<Char extends string>(char: Char) {
 	if (char.length !== 1) {
 		throw new Error(`Not a char: "${char}"`);
 	}
 
-	return () => undefined;
+	return parseMonad(parseAnyChar, () => undefined);
 }
