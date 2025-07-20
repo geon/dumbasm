@@ -6,5 +6,7 @@ export function parseChar<Char extends string>(char: Char) {
 		throw new Error(`Not a char: "${char}"`);
 	}
 
-	return parseMonad(parseAnyChar, () => undefined);
+	return parseMonad(parseAnyChar, (parsed) =>
+		parsed !== char ? undefined : char,
+	);
 }
