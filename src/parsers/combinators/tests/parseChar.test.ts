@@ -16,4 +16,13 @@ testExamples("parseChar", [
 		input: "abc",
 		result: failParsing(),
 	},
+	{
+		name: "match",
+		parser: parseChar("a"),
+		input: "abc",
+		result: {
+			consumed: 1,
+			parsed: "a",
+		},
+	},
 ]);
