@@ -18,4 +18,13 @@ testExamples<readonly string[]>("parseSequence", [
 		input: "",
 		result: undefined,
 	},
+	{
+		name: "match",
+		parser: parseSequence([parseAnyChar]),
+		input: "abc",
+		result: {
+			consumed: 1,
+			parsed: ["a"],
+		},
+	},
 ]);
