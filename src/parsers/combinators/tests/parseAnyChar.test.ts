@@ -9,4 +9,14 @@ testExamples("parseAnyChar", [
 		input: "",
 		result: failParsing(),
 	},
+	{
+		name: "match",
+		parser: parseAnyChar,
+		input: "abc",
+		fromIndex: 1,
+		result: {
+			consumed: 1,
+			parsed: "b",
+		},
+	},
 ]);
