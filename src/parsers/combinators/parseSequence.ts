@@ -17,24 +17,22 @@ type SequenceResults<TParsers extends readonly Parser<unknown>[]> =
 
 export function parseSequence<const Parsers extends readonly Parser<unknown>[]>(
 	parsers: Parsers,
-): Parser<SequenceResults<Parsers>[]> {
+): Parser<SequenceResults<Parsers>> {
 	return (input, fromIndex) => {
-		const parser = parsers[0];
-		if (!parser) {
-			return {
-				consumed: 0,
-				parsed: [] as any,
-			};
-		}
-
-		const parseResult = parser(input, fromIndex);
-		if (!parseResult) {
-			return undefined;
+		let consumed = 0;
+		const parsed = [];
+		for (const parser of parsers) {
+			const parseResult = parser(input, fromIndex + consumed);
+			if (!parseResult) {
+				return undefined;
+			}
+			consumed += parseResult.consumed;
+			parsed.push(parseResult.parsed);
 		}
 
 		return {
-			consumed: parseResult.consumed,
-			parsed: [parseResult.parsed],
+			consumed,
+			parsed: parsed as SequenceResults<Parsers>,
 		};
 	};
 }
