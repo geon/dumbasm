@@ -1,7 +1,7 @@
 import { suite, test, expect } from "vitest";
 import { parseChar } from "../parseChar.js";
 import { testExamples } from "./testExamples.js";
-import { createParseError } from "../Parser.js";
+import { createParseError, createParseResult } from "../Parser.js";
 
 suite("parseChar", () => {
 	test("too long", () => {
@@ -15,5 +15,11 @@ testExamples("parseChar", [
 		parser: parseChar("b"),
 		input: "abc",
 		result: createParseError(0, 'Expected char "b".'),
+	},
+	{
+		name: "match",
+		parser: parseChar("a"),
+		input: "abc",
+		result: createParseResult(1, "a"),
 	},
 ]);
