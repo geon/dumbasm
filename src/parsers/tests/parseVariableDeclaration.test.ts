@@ -20,4 +20,13 @@ testExamples<ParsedVariableDeclaration>("parseVariableDeclaration", [
 			name: "myVariable",
 		}),
 	},
+	{
+		input: "regA uint8 myVariable",
+		parser: parseVariableDeclaration,
+		result: createParseResult(21, {
+			location: "regA",
+			type: "uint8",
+			name: "myVariable",
+		}),
+	},
 ]);
