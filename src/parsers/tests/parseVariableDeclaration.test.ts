@@ -20,4 +20,16 @@ testExamples("parseVariableDeclaration", [
 			},
 		},
 	},
+	{
+		input: "regA uint8 myVariable",
+		parser: parseVariableDeclaration,
+		result: {
+			consumed: 21,
+			parsed: {
+				location: "regA",
+				type: "uint8",
+				name: "myVariable",
+			},
+		},
+	},
 ]);
