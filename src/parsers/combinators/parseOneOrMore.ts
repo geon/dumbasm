@@ -11,6 +11,9 @@ export function parseOneOrMore<T>(parser: Parser<T>): Parser<readonly T[]> {
 			}
 			consumed += parseResult.consumed;
 			parsed.push(parseResult.parsed);
+			if (!parseResult.consumed) {
+				break;
+			}
 		}
 
 		if (parsed.length === 0) {
