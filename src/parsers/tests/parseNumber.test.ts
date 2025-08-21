@@ -19,4 +19,15 @@ testExamples("parseNumber", [
 			},
 		},
 	},
+	{
+		input: "$dead",
+		parser: parseNumber,
+		result: {
+			consumed: 5,
+			parsed: {
+				format: "hex",
+				value: 0xdead,
+			},
+		},
+	},
 ]);
