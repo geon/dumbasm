@@ -3,11 +3,14 @@ import {
 	type Mos6502Operand,
 } from "../mos6502Instructions.js";
 import { parseAlternatives } from "./combinators/parseAlternatives.js";
-import { parseChar } from "./combinators/parseChar.js";
+import {
+	parseChar,
+	parseCharCaseInsensitive,
+} from "./combinators/parseChar.js";
 import { parseMonad } from "./combinators/parseMonad.js";
 import type { Parser } from "./combinators/Parser.js";
 import { parseSequence } from "./combinators/parseSequence.js";
-import { parseString } from "./combinators/parseString.js";
+import { parseStringCaseInsensitive } from "./combinators/parseString.js";
 import { parseIdentifier } from "./parseIdentifier.js";
 import { parseNumber, type ParsedNumber } from "./parseNumber.js";
 
@@ -100,7 +103,7 @@ function parseIndexedAddressingMode<
 		parseSequence([
 			parseOperand,
 			parseChar(","),
-			parseChar(addressingMode.slice(-1)),
+			parseCharCaseInsensitive(addressingMode.slice(-1)),
 		]),
 		([operand]) => {
 			return {
@@ -121,7 +124,11 @@ const parseIndirectAddressingMode: Parser<
 const parseIndirectXAddressingMode: Parser<
 	ParsedMos6502AddressingMode<"(indirect,X)">
 > = parseMonad(
-	parseSequence([parseChar("("), parseOperand, parseString(",X)")]),
+	parseSequence([
+		parseChar("("),
+		parseOperand,
+		parseStringCaseInsensitive(",X)"),
+	]),
 	([, operand]) => ({
 		addressingMode: "(indirect,X)",
 		operand,
@@ -131,7 +138,11 @@ const parseIndirectXAddressingMode: Parser<
 const parseIndirectYAddressingMode: Parser<
 	ParsedMos6502AddressingMode<"(indirect),Y">
 > = parseMonad(
-	parseSequence([parseChar("("), parseOperand, parseString("),Y")]),
+	parseSequence([
+		parseChar("("),
+		parseOperand,
+		parseStringCaseInsensitive("),Y"),
+	]),
 	([, operand]) => ({
 		addressingMode: "(indirect),Y",
 		operand,

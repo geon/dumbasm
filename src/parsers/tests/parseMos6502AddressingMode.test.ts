@@ -42,6 +42,17 @@ testExamples<ParsedMos6502AddressingMode<ParsableMos6502AddressingMode>>(
 			},
 		},
 		{
+			input: "$abcd,x",
+			parser: mos6502AddressingModeParsers["absolute,X"],
+			result: {
+				consumed: 7,
+				parsed: {
+					addressingMode: "absolute,X",
+					operand: { type: "number", number: { format: "hex", value: 0xabcd } },
+				},
+			},
+		},
+		{
 			input: "$abcd",
 			parser: mos6502AddressingModeParsers["indirect"],
 			result: {
@@ -65,6 +76,28 @@ testExamples<ParsedMos6502AddressingMode<ParsableMos6502AddressingMode>>(
 		},
 		{
 			input: "($abcd),Y",
+			parser: mos6502AddressingModeParsers["(indirect),Y"],
+			result: {
+				consumed: 9,
+				parsed: {
+					addressingMode: "(indirect),Y",
+					operand: { type: "number", number: { format: "hex", value: 0xabcd } },
+				},
+			},
+		},
+		{
+			input: "($abcd,x)",
+			parser: mos6502AddressingModeParsers["(indirect,X)"],
+			result: {
+				consumed: 9,
+				parsed: {
+					addressingMode: "(indirect,X)",
+					operand: { type: "number", number: { format: "hex", value: 0xabcd } },
+				},
+			},
+		},
+		{
+			input: "($abcd),y",
 			parser: mos6502AddressingModeParsers["(indirect),Y"],
 			result: {
 				consumed: 9,
