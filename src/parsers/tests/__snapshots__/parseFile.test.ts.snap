@@ -1,0 +1,281 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`parseFile 1`] = `
+{
+  "consumed": 163,
+  "parsed": [
+    [
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": "",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": ".export Start",
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": ".export Start",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": "",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": undefined,
+          "label": "Start",
+          "originalSource": "Start:",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": {
+            "addressingMode": "immediate",
+            "mnemonic": "ldy",
+            "operand": {
+              "number": {
+                "format": "dec",
+                "value": 0,
+              },
+              "type": "number",
+            },
+          },
+          "label": undefined,
+          "originalSource": "		ldy #0",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": {
+            "addressingMode": "absolute,Y",
+            "mnemonic": "lda",
+            "operand": {
+              "identifier": "message",
+              "type": "identifier",
+            },
+          },
+          "label": "loop",
+          "originalSource": "loop:   lda message,Y",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": {
+            "addressingMode": "absolute",
+            "mnemonic": "jsr",
+            "operand": {
+              "number": {
+                "format": "hex",
+                "value": 65490,
+              },
+              "type": "number",
+            },
+          },
+          "label": undefined,
+          "originalSource": "		jsr $ffd2",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": {
+            "addressingMode": "implied",
+            "mnemonic": "iny",
+            "operand": undefined,
+          },
+          "label": undefined,
+          "originalSource": "		iny",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": {
+            "addressingMode": "immediate",
+            "mnemonic": "cpy",
+            "operand": {
+              "number": {
+                "format": "dec",
+                "value": 14,
+              },
+              "type": "number",
+            },
+          },
+          "label": undefined,
+          "originalSource": "		cpy #14",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": {
+            "addressingMode": "relative",
+            "mnemonic": "bne",
+            "operand": {
+              "identifier": "loop",
+              "type": "identifier",
+            },
+          },
+          "label": undefined,
+          "originalSource": "		bne loop",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": {
+            "addressingMode": "implied",
+            "mnemonic": "rts",
+            "operand": undefined,
+          },
+          "label": undefined,
+          "originalSource": "		rts",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": "",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": ".byte 147",
+          "instruction": undefined,
+          "label": "message",
+          "originalSource": "message: .byte 147",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": ".text "hello world"",
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": "		.text "hello world"",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": ".byte 13",
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": "		.byte 13",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": ".byte 10",
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": "		.byte 10",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": "",
+        },
+      ],
+    ],
+    undefined,
+  ],
+}
+`;
+
+exports[`parseFile 2`] = `
+{
+  "consumed": 28,
+  "parsed": [
+    [
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": "",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": {
+            "addressingMode": "immediate",
+            "mnemonic": "lda",
+            "operand": {
+              "number": {
+                "format": "dec",
+                "value": 0,
+              },
+              "type": "number",
+            },
+          },
+          "label": undefined,
+          "originalSource": "lda #0",
+        },
+      ],
+      [
+        "dumbasm",
+        {
+          "location": undefined,
+          "name": "foo",
+          "type": "uint8",
+        },
+      ],
+      [
+        "dumbasm",
+        {
+          "location": undefined,
+          "name": "bar",
+          "type": "uint8",
+        },
+      ],
+      [
+        "asm",
+        {
+          "directive": undefined,
+          "instruction": undefined,
+          "label": undefined,
+          "originalSource": "",
+        },
+      ],
+    ],
+    undefined,
+  ],
+}
+`;
