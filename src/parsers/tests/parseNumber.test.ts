@@ -17,4 +17,12 @@ testExamples("parseNumber", [
 			parsed: 123,
 		},
 	},
+	{
+		input: "$dead",
+		parser: parseNumber,
+		result: {
+			consumed: 5,
+			parsed: 0xdead,
+		},
+	},
 ]);
