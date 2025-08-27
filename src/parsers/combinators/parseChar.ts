@@ -18,6 +18,6 @@ export function parseCharCaseInsensitive<Char extends string>(char: Char) {
 	}
 
 	return parseMonad(parseAnyChar, (parsed) =>
-		parsed.toLowerCase() !== char.toLowerCase() ? undefined : char,
+		parsed.toLowerCase() !== char.toLowerCase() ? failParsing() : char,
 	);
 }

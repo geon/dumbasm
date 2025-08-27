@@ -27,7 +27,13 @@ testExamples("parseChar", [
 		},
 	},
 	{
-		name: "case insensitive",
+		name: "no match case insensitive",
+		parser: parseCharCaseInsensitive("b"),
+		input: "abc",
+		result: failParsing(),
+	},
+	{
+		name: "match case insensitive",
 		parser: parseCharCaseInsensitive("A"),
 		input: "abc",
 		result: {

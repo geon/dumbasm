@@ -1,5 +1,5 @@
 import { failParsing } from "../Parser.js";
-import { parseString } from "../parseString.js";
+import { parseString, parseStringCaseInsensitive } from "../parseString.js";
 import { testExamples } from "./testExamples.js";
 
 testExamples("parseString", [
@@ -16,6 +16,15 @@ testExamples("parseString", [
 		result: {
 			consumed: 5,
 			parsed: "hello",
+		},
+	},
+	{
+		name: "case insensitive",
+		parser: parseStringCaseInsensitive("HelLo"),
+		input: "hello world",
+		result: {
+			consumed: 5,
+			parsed: "HelLo",
 		},
 	},
 ]);
