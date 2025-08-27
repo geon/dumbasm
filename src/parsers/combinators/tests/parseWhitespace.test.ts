@@ -27,4 +27,13 @@ testExamples("parseWhitespace", [
 			parsed: "\t",
 		},
 	},
+	{
+		name: "match multiple",
+		parser: parseWhitespace,
+		input: " \t",
+		result: {
+			consumed: 2,
+			parsed: " \t",
+		},
+	},
 ]);
