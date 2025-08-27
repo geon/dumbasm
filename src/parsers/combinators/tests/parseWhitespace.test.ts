@@ -21,4 +21,10 @@ testExamples("parseWhitespace", [
 		input: "\t",
 		result: createParseResult(1, "\t"),
 	},
+	{
+		name: "match multiple",
+		parser: parseWhitespace,
+		input: " \t",
+		result: createParseResult(2, " \t"),
+	},
 ]);
