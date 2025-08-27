@@ -2,7 +2,7 @@ import { expect, suite, test } from "vitest";
 import type { Parser, ParseResult } from "../Parser.js";
 
 export type Example<T> = Readonly<{
-	name: string;
+	name?: string;
 	parser: Parser<T>;
 	input: string;
 	fromIndex?: number;
@@ -15,7 +15,7 @@ export function testExamples<T>(
 ) {
 	suite(suiteName, () => {
 		for (const example of examples) {
-			test(example.name, () => {
+			test(example.name ?? example.input, () => {
 				expect(
 					example.parser(example.input, example.fromIndex ?? 0),
 				).toStrictEqual(example.result);

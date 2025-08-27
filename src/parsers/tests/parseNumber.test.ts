@@ -9,4 +9,12 @@ testExamples("parseNumber", [
 		parser: parseNumber,
 		result: failParsing(),
 	},
+	{
+		input: "123",
+		parser: parseNumber,
+		result: {
+			consumed: 3,
+			parsed: 123,
+		},
+	},
 ]);
