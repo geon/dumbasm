@@ -14,4 +14,9 @@ testExamples("parseNumber", [
 		parser: parseNumber,
 		result: createParseResult(3, 123),
 	},
+	{
+		input: "$dead",
+		parser: parseNumber,
+		result: createParseResult(5, 0xdead),
+	},
 ]);
