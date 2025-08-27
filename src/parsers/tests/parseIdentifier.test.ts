@@ -8,4 +8,12 @@ testExamples("parseIdentifier", [
 		parser: parseIdentifier,
 		result: failParsing(),
 	},
+	{
+		input: "hello world",
+		parser: parseIdentifier,
+		result: {
+			consumed: 5,
+			parsed: "hello",
+		},
+	},
 ]);
