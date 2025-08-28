@@ -24,4 +24,9 @@ testExamples("parseIdentifier", [
 			parsed: "numberSuffix123",
 		},
 	},
+	{
+		input: "123numberPrefix",
+		parser: parseIdentifier,
+		result: failParsing(),
+	},
 ]);
