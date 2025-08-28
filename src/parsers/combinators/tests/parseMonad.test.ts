@@ -19,4 +19,10 @@ testExamples("parseMonad", [
 			parsed: "A",
 		},
 	},
+	{
+		name: "refused",
+		parser: parseMonad(parseAnyChar, () => failParsing()),
+		input: "abc",
+		result: failParsing(),
+	},
 ]);
