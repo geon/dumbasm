@@ -1,6 +1,7 @@
 import { parseOneOrMore, parseZeroOrMore } from "../parseSome.js";
 import { parseChar } from "../parseChar.js";
 import { testExamples } from "./testExamples.js";
+import { failParsing } from "../Parser.js";
 
 testExamples<readonly string[]>("parseSome", [
 	{
@@ -19,6 +20,21 @@ testExamples<readonly string[]>("parseSome", [
 		result: {
 			consumed: 2,
 			parsed: ["a", "a"],
+		},
+	},
+	{
+		name: "parseOneOrMore no match",
+		parser: parseOneOrMore(parseChar("b")),
+		input: "abc",
+		result: failParsing(),
+	},
+	{
+		name: "parseZeroOrMore no match",
+		parser: parseZeroOrMore(parseChar("b")),
+		input: "abc",
+		result: {
+			consumed: 0,
+			parsed: [],
 		},
 	},
 ]);
