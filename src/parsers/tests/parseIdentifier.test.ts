@@ -18,4 +18,9 @@ testExamples("parseIdentifier", [
 		parser: parseIdentifier,
 		result: createParseResult(15, "numberSuffix123"),
 	},
+	{
+		input: "123numberPrefix",
+		parser: parseIdentifier,
+		result: createParseError(0, "Expected an identifier"),
+	},
 ]);
