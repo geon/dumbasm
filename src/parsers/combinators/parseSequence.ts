@@ -1,4 +1,9 @@
-import { createParseResult, type ParseError, type Parser } from "./Parser.js";
+import {
+	createParseResult,
+	parsingFailed,
+	type ParseError,
+	type Parser,
+} from "./Parser.js";
 
 type Tail<T extends readonly unknown[]> = T extends readonly [
 	unknown,
@@ -16,9 +21,19 @@ type SequenceResults<TParsers extends readonly Parser<unknown>[]> =
 			];
 
 export function parseSequence<const Parsers extends readonly Parser<unknown>[]>(
-	_parsers: Parsers,
+	parsers: Parsers,
 ): Parser<SequenceResults<Parsers>> {
-	return (_input, _fromIndex) => {
-		return createParseResult(0, [] as any);
+	return (input, fromIndex) => {
+		const parser = parsers[0];
+		if (!parser) {
+			return createParseResult(0, [] as any);
+		}
+
+		const parseResult = parser(input, fromIndex);
+		if (parsingFailed(parseResult)) {
+			return parseResult;
+		}
+
+		throw new Error("Not implemented.");
 	};
 }
