@@ -1,4 +1,4 @@
-import type { ParseFailure, Parser } from "./Parser.js";
+import { failParsing, type ParseFailure, type Parser } from "./Parser.js";
 
 type Tail<T extends readonly unknown[]> = T extends readonly [
 	unknown,
@@ -16,12 +16,17 @@ type SequenceResults<TParsers extends readonly Parser<unknown>[]> =
 			];
 
 export function parseSequence<const Parsers extends readonly Parser<unknown>[]>(
-	_parsers: Parsers,
+	parsers: Parsers,
 ): Parser<SequenceResults<Parsers>> {
 	return (_input, _fromIndex) => {
-		return {
-			consumed: 0,
-			parsed: [] as any,
-		};
+		const parser = parsers[0];
+		if (!parser) {
+			return {
+				consumed: 0,
+				parsed: [] as any,
+			};
+		}
+
+		return failParsing();
 	};
 }
