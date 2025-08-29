@@ -12,7 +12,7 @@ type Tail<T extends readonly unknown[]> = T extends readonly [
 	? Rest
 	: readonly [];
 
-type SequenceResults<TParsers extends readonly Parser<unknown>[]> =
+export type SequenceResults<TParsers extends readonly Parser<unknown>[]> =
 	TParsers extends readonly []
 		? []
 		: [
