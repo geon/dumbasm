@@ -28,4 +28,28 @@ testExamples("parseFile", [
 			parsed: [],
 		},
 	},
+	{
+		name: "instruction x 2",
+		input: "inc\ntax",
+		parser: parseFile,
+		result: {
+			consumed: 7,
+			parsed: [
+				{
+					type: "instruction",
+					value: {
+						mnemonic: "inc",
+						operand: undefined,
+					},
+				},
+				{
+					type: "instruction",
+					value: {
+						mnemonic: "tax",
+						operand: undefined,
+					},
+				},
+			],
+		},
+	},
 ]);
