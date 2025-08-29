@@ -5,12 +5,17 @@ import { type Parser } from "./combinators/Parser.js";
 import { parseZeroOrMore } from "./combinators/parseSome.js";
 import { parseAsmLine, type AsmFragment } from "./parseAsmLine.js";
 import { parseSequenceIndex } from "./combinators/parseSequenceIndex.js";
+import { parseDumbasmLine, type DumbasmFragment } from "./parseDumbasmLine.js";
+import { parseAlternatives } from "./combinators/parseAlternatives.js";
 
-export type ParsedFile = readonly AsmFragment[];
+export type ParsedFile = readonly (AsmFragment | DumbasmFragment)[];
 
 export const parseFile: Parser<ParsedFile> = parseMonad(
 	parseZeroOrMore(
-		parseSequenceIndex(0, [parseAsmLine, parseOptional(parseNewline)]),
+		parseSequenceIndex(0, [
+			parseAlternatives([parseAsmLine, parseDumbasmLine]),
+			parseOptional(parseNewline),
+		]),
 	),
 	(lines) => lines.flat(),
 );

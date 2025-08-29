@@ -3,6 +3,7 @@ import { formatAsmFragments } from "../formatAsmFragments";
 import { parseFile } from "../parsers/parseFile";
 import { parsingFailed } from "../parsers/combinators/Parser";
 import { asmSamples } from "../parsers/tests/asm-samples";
+import { lowerDumdasm } from "../lowerDumdasm";
 
 suite("formatAsmFragments", () => {
 	test("helloWorld", () => {
@@ -10,6 +11,6 @@ suite("formatAsmFragments", () => {
 		if (parsingFailed(parsed)) {
 			throw new Error("Parsing failed.");
 		}
-		expect(formatAsmFragments(parsed.parsed)).toMatchSnapshot();
+		expect(formatAsmFragments(lowerDumdasm(parsed.parsed))).toMatchSnapshot();
 	});
 });
