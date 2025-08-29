@@ -7,7 +7,7 @@ import {
 
 export function parseMonad<T, T2>(
 	parser: Parser<T>,
-	transform: (parsed: T) => T2 | ParseFailure,
+	transform: (parsed: T, unparsed: string) => T2 | ParseFailure,
 ): Parser<Exclude<T2, ParseFailure>> {
 	return (input, fromIndex) => {
 		const parsed = parser(input, fromIndex);
@@ -15,7 +15,10 @@ export function parseMonad<T, T2>(
 			return failParsing();
 		}
 
-		const transformed = transform(parsed.parsed);
+		const transformed = transform(
+			parsed.parsed,
+			input.slice(fromIndex, fromIndex + parsed.consumed),
+		);
 		if (parsingFailed(transformed)) {
 			return failParsing();
 		}
