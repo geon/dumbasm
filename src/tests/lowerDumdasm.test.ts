@@ -17,6 +17,16 @@ testExamples("lowerDumdasm", [
 			lda myLabel
 		`,
 	},
+	{
+		name: "unused variable",
+		input: `
+			uint8 myVariable
+			lda myLabel
+		`,
+		result: `
+			lda myLabel
+		`,
+	},
 ]);
 
 export type Example = Readonly<{

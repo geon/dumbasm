@@ -8,6 +8,10 @@ export function lowerDumdasm(
 	const result: AsmFragment[] = [];
 
 	for (const fragment of fragments) {
+		if (fragment.type === "variableDeclaration" || fragment.type === "scope") {
+			continue;
+		}
+
 		result.push(...lowerDumbasmFragment(fragment));
 	}
 
