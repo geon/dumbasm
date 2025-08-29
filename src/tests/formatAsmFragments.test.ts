@@ -21,7 +21,12 @@ function parse(fileContents: string) {
 		throw new Error("Parsing failed.");
 	}
 
-	const asmFragments = parsed.parsed;
+	const asmFragments = parsed.parsed.map((fragment) => {
+		if (fragment.type === "variableDeclaration") {
+			throw new Error("Not implemented.");
+		}
+		return fragment;
+	});
 
 	return asmFragments;
 }
