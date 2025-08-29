@@ -1,11 +1,12 @@
 import { suite, test, expect } from "vitest";
-import { parseChar } from "../parseChar.js";
+import { parseChar, parseCharCaseInsensitive } from "../parseChar.js";
 import { testExamples } from "./testExamples.js";
 import { failParsing } from "../Parser.js";
 
 suite("parseChar", () => {
 	test("too long", () => {
 		expect(() => parseChar("too long")).toThrow();
+		expect(() => parseCharCaseInsensitive("too long")).toThrow();
 	});
 });
 
@@ -23,6 +24,15 @@ testExamples("parseChar", [
 		result: {
 			consumed: 1,
 			parsed: "a",
+		},
+	},
+	{
+		name: "case insensitive",
+		parser: parseCharCaseInsensitive("A"),
+		input: "abc",
+		result: {
+			consumed: 1,
+			parsed: "A",
 		},
 	},
 ]);
