@@ -69,6 +69,22 @@ testExamples<ParsedFile>("parseFile", [
 		parser: parseFile,
 		result: createParseError(6, "SYNTAX ERROR"),
 	},
+	{
+		name: "variable",
+		input: "uint8 myVariable",
+		parser: parseFile,
+		result: createParseResult(16, [
+			{
+				type: "variableDeclaration",
+				value: {
+					lineNum: 1,
+					location: undefined,
+					name: "myVariable",
+					type: "uint8",
+				},
+			},
+		]),
+	},
 ]);
 
 suite("parseFile", () => {

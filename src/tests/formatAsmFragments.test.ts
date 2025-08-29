@@ -31,7 +31,14 @@ export function testExamples(
 				if (parsingFailed(parsed)) {
 					assert.fail(formatError(parsed, example.input));
 				} else {
-					expect(formatAsmFragments(parsed.parsed)).toMatchSnapshot();
+					const asmFragments = parsed.parsed.map((fragment) => {
+						if (fragment.type === "variableDeclaration") {
+							throw new Error("Not implemented.");
+						}
+						return fragment;
+					});
+
+					expect(formatAsmFragments(asmFragments)).toMatchSnapshot();
 				}
 			});
 		}

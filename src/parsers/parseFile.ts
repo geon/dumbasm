@@ -7,8 +7,9 @@ import { parseSequenceIndex } from "./combinators/parseSequenceIndex.js";
 import { parseZeroOrMore } from "./combinators/parseSome.js";
 import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
 import { parseAsmLine, type AsmFragment } from "./parseAsmLine.js";
+import { parseDumbasmLine, type DumbasmFragment } from "./parseDumbasmLine.js";
 
-export type ParsedFile = readonly AsmFragment[];
+export type ParsedFile = readonly (AsmFragment | DumbasmFragment)[];
 
 export function parseFile(...args: ParserArgs): ParseResult<ParsedFile> {
 	return parseWithErrorMessage(
@@ -19,6 +20,7 @@ export function parseFile(...args: ParserArgs): ParseResult<ParsedFile> {
 					parseAlternatives([
 						//
 						parseAsmLine,
+						parseDumbasmLine,
 						parseMonad(parseNewline, (_, { result }) => result(undefined)),
 					]),
 				),
