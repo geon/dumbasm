@@ -1,5 +1,8 @@
 import { parseFile } from "../parseFile.js";
 import { testExamples } from "../combinators/tests/testExamples.js";
+import { asmSamples } from "./asm-samples.js";
+import { suite, test, expect } from "vitest";
+import { parsingFailed } from "../combinators/Parser.js";
 
 testExamples("parseFile", [
 	{
@@ -53,3 +56,11 @@ testExamples("parseFile", [
 		},
 	},
 ]);
+
+suite("parseFile", () => {
+	test("helloWorld", () => {
+		const parsed = parseFile(asmSamples.helloWorld, 0);
+		expect(parsingFailed(parsed)).toBe(false);
+		expect(parsed).toMatchSnapshot();
+	});
+});
