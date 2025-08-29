@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`formatAsmFragments > hello world 1`] = `
+".export Start
+Start:
+ldy #$0
+loop:
+lda message,Y
+jsr $ffd2
+iny
+cpy #$e
+bne loop
+rts
+message:
+.byte 147
+.text "hello world"
+.byte 13
+.byte 10"
+`;
