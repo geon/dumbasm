@@ -19,4 +19,13 @@ testExamples("parseFile", [
 			],
 		},
 	},
+	{
+		name: "newline",
+		input: "\n",
+		parser: parseFile,
+		result: {
+			consumed: 1,
+			parsed: [],
+		},
+	},
 ]);
