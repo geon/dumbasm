@@ -17,6 +17,13 @@ message:
 	.byte 0 ; null terminator
 `;
 
+const addressingModesMissingInHelloWorld = `
+       rol A
+       lda ($ab12)
+       lda ($ab12),Y
+       lda ($ab12,X)
+`;
+
 // https://cc65.github.io/doc/ca65.html#toc4.1
 const ca65Syntax = `
         Label:                          ; A label and a comment
@@ -26,9 +33,10 @@ const ca65Syntax = `
                 mymac   $20             ; Macro expansion
                 MySym = 3*L1            ; Symbol definition
         MaSym   = Label                 ; Another symbol
-`
+`;
 
 export const asmSamples = {
 	helloWorld,
-	ca65Syntax
+	addressingModesMissingInHelloWorld,
+	ca65Syntax,
 };

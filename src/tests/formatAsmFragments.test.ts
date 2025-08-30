@@ -9,6 +9,10 @@ testExamples("formatAsmFragments", [
 		name: "hello world",
 		input: asmSamples.helloWorld,
 	},
+	{
+		name: "missing modes",
+		input: asmSamples.addressingModesMissingInHelloWorld,
+	},
 ]);
 
 function parse(fileContents: string) {
