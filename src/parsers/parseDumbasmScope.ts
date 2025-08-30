@@ -11,6 +11,7 @@ import { parseSequenceIndex } from "./combinators/parseSequenceIndex.js";
 import { parseZeroOrMore } from "./combinators/parseSome.js";
 import { parseWhitespace } from "./combinators/parseWhitespace.js";
 import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
+import { parseComment } from "./parseComment.js";
 import type { ParsedFile } from "./parseFile.js";
 
 export function parseDumbasmScope(
@@ -26,6 +27,7 @@ export function parseDumbasmScope(
 			),
 			parseChar("}"),
 			parseOptional(parseWhitespace),
+			parseOptional(parseComment),
 		]) as Parser<ParsedFile>,
 	)(...args);
 }
