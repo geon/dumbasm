@@ -17,6 +17,14 @@ message: .byte 147
 		.byte 10
 `;
 
+const addressingModesMissingInHelloWorld = `
+	rol A
+	lda ($ab12)
+	lda ($ab12),Y
+	lda ($ab12,X)
+`;
+
 export const asmSamples = {
 	helloWorld,
+	addressingModesMissingInHelloWorld,
 };

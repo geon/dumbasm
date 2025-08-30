@@ -17,3 +17,10 @@ message:
 .byte 13
 .byte 10"
 `;
+
+exports[`formatAsmFragments > missing modes 1`] = `
+"rol A
+lda ($ab12)
+lda ($ab12),Y
+lda ($ab12,X)"
+`;
