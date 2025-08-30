@@ -17,6 +17,13 @@ message:
 	.byte 0 ; null terminator
 `;
 
+const addressingModesMissingInHelloWorld = `
+       rol A
+       jmp ($ab12)
+       lda ($ab12),Y
+       lda ($ab12,X)
+`;
+
 // https://cc65.github.io/doc/ca65.html#toc4.1
 const ca65Syntax = `
         Label:                          ; A label and a comment
@@ -30,5 +37,6 @@ const ca65Syntax = `
 
 export const asmSamples = {
 	helloWorld,
+	addressingModesMissingInHelloWorld,
 	ca65Syntax,
 };

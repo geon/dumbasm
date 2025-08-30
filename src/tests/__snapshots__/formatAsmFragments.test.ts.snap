@@ -15,3 +15,10 @@ message:
 .text "HELLO WORLD"
 .byte 0 ; null terminator"
 `;
+
+exports[`formatAsmFragments > missing modes 1`] = `
+"rol A
+jmp ($ab12)
+lda ($ab12),Y
+lda ($ab12,X)"
+`;

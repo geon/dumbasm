@@ -10,6 +10,10 @@ testExamples("formatAsmFragments", [
 		name: "hello world",
 		input: asmSamples.helloWorld,
 	},
+	{
+		name: "missing modes",
+		input: asmSamples.addressingModesMissingInHelloWorld,
+	},
 ]);
 
 export function testExamples(
