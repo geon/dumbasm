@@ -1,12 +1,14 @@
-import {
-	createParseError,
-	type ParserArgs,
-	type ParseResult,
-} from "./combinators/Parser.js";
+import { parseMonad } from "./combinators/parseMonad.js";
+import { type ParserArgs, type ParseResult } from "./combinators/Parser.js";
+import { parseString } from "./combinators/parseString.js";
+import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
 import type { ParsedFile } from "./parseFile.js";
 
 export function parseDumbasmScope(
-	..._args: ParserArgs
+	...args: ParserArgs
 ): ParseResult<ParsedFile> {
-	return createParseError(0, "Expected scope.");
+	return parseWithErrorMessage<ParsedFile>(
+		"Expected scope.",
+		parseMonad(parseString("{}"), (_, { result }) => result([])),
+	)(...args);
 }
