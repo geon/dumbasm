@@ -19,4 +19,10 @@ testExamples("parseDumbasmScope", [
 		parser: parseDumbasmScope,
 		result: createParseResult(3, []),
 	},
+	{
+		name: "whitespace outside",
+		input: " {} ",
+		parser: parseDumbasmScope,
+		result: createParseResult(4, []),
+	},
 ]);
