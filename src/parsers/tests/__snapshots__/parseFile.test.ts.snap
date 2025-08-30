@@ -1,0 +1,118 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`parseFile > hello world 1`] = `
+{
+  "consumed": 214,
+  "parsed": [
+    {
+      "type": "directive",
+      "value": ".export Start",
+    },
+    {
+      "type": "label",
+      "value": "Start",
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "mnemonic": "ldy",
+        "operand": {
+          "type": "immediate",
+          "value": 0,
+        },
+      },
+    },
+    {
+      "type": "label",
+      "value": "loop",
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "mnemonic": "lda",
+        "operand": {
+          "type": "indexed",
+          "value": {
+            "index": "Y",
+            "operand": {
+              "type": "identifier",
+              "value": "message",
+            },
+          },
+        },
+      },
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "mnemonic": "jsr",
+        "operand": {
+          "type": "address",
+          "value": {
+            "type": "number",
+            "value": 65490,
+          },
+        },
+      },
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "mnemonic": "iny",
+        "operand": undefined,
+      },
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "mnemonic": "cpy",
+        "operand": {
+          "type": "immediate",
+          "value": 14,
+        },
+      },
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "mnemonic": "bne",
+        "operand": {
+          "type": "address",
+          "value": {
+            "type": "identifier",
+            "value": "loop",
+          },
+        },
+      },
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "mnemonic": "rts",
+        "operand": undefined,
+      },
+    },
+    {
+      "type": "label",
+      "value": "message",
+    },
+    {
+      "type": "directive",
+      "value": ".byte 147",
+    },
+    {
+      "type": "directive",
+      "value": ".text "hello world"",
+    },
+    {
+      "type": "directive",
+      "value": ".byte 13",
+    },
+    {
+      "type": "directive",
+      "value": ".byte 10",
+    },
+  ],
+  "type": "result",
+}
+`;
