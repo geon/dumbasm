@@ -25,4 +25,9 @@ testExamples("parseDumbasmScope", [
 		parser: parseDumbasmScope,
 		result: createParseResult(4, []),
 	},
+	{
+		input: "{} ; trailing comment",
+		parser: parseDumbasmScope,
+		result: createParseResult(21, []),
+	},
 ]);
