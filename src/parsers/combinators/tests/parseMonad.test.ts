@@ -24,8 +24,8 @@ testExamples("parseMonad", [
 	},
 	{
 		name: "refused",
-		parser: parseMonad(parseAnyChar, () => failParsing("")),
+		parser: parseMonad(parseAnyChar, () => failParsing("Custom message.")),
 		input: "abc",
-		result: failParsing(""),
+		result: failParsing("Custom message."),
 	},
 ]);
