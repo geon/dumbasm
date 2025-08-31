@@ -20,6 +20,7 @@ export function parseAlternatives<TParsers extends readonly Parser<unknown>[]>(
 		}
 
 		return failParsing(
+			args[1],
 			[
 				"No alternative matched.",
 				...failures.map((fail) => "\t" + fail.message),

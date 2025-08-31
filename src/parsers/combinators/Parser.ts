@@ -1,6 +1,7 @@
 export type ParseFailure = {
 	type: "error";
 	message: string;
+	fromIndex: number;
 };
 
 type ParsingSuccess<T> = {
@@ -15,8 +16,8 @@ export type ParserArgs = readonly [input: string, fromIndex: number];
 
 export type Parser<T> = (...args: ParserArgs) => ParseResult<T>;
 
-export function failParsing(message: string): ParseFailure {
-	return { type: "error", message };
+export function failParsing(fromIndex: number, message: string): ParseFailure {
+	return { type: "error", message, fromIndex };
 }
 
 // export function crerateParsingSuccess<T>(message: string): ParsingSuccess<> {

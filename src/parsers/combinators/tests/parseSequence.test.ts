@@ -18,7 +18,7 @@ testExamples<readonly string[]>("parseSequence", [
 		name: "no match",
 		parser: parseSequence([parseAnyChar]),
 		input: "",
-		result: failParsing("Unexpectedly reached end of file."),
+		result: failParsing(0, "Unexpectedly reached end of file."),
 	},
 	{
 		name: "match",

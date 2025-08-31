@@ -12,7 +12,7 @@ testExamples("parseMonad", [
 		name: "no match",
 		parser: parseMonad(parseAnyChar, createMonadResult),
 		input: "",
-		result: failParsing("Unexpectedly reached end of file."),
+		result: failParsing(0, "Unexpectedly reached end of file."),
 	},
 	{
 		name: "match",
@@ -30,6 +30,6 @@ testExamples("parseMonad", [
 		name: "refused",
 		parser: parseMonad(parseAnyChar, () => createMonadError("Custom message.")),
 		input: "abc",
-		result: failParsing("Custom message."),
+		result: failParsing(0, "Custom message."),
 	},
 ]);

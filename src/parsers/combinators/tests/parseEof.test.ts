@@ -7,7 +7,7 @@ testExamples("parseEof", [
 		name: "no match",
 		parser: parseEof,
 		input: "-",
-		result: failParsing("Expected end of file."),
+		result: failParsing(0, "Expected end of file."),
 	},
 	{
 		name: "match",

@@ -9,13 +9,14 @@ testExamples("parseAlternatives", [
 		parser: parseAlternatives([]),
 		input: "abc",
 		// TODO: Throw instead. The problem is invalid input.
-		result: failParsing("No alternative matched."),
+		result: failParsing(0, "No alternative matched."),
 	},
 	{
 		name: "no match",
 		parser: parseAlternatives([parseAnyChar]),
 		input: "",
 		result: failParsing(
+			0,
 			"No alternative matched.\n\tUnexpectedly reached end of file.",
 		),
 	},

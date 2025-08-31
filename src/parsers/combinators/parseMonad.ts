@@ -36,7 +36,7 @@ export function parseMonad<T, T2>(
 
 		const transformed = transform(parsed.parsed);
 		if (transformed.type === "monad error") {
-			return failParsing(transformed.message);
+			return failParsing(fromIndex, transformed.message);
 		}
 
 		return {

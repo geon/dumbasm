@@ -14,7 +14,7 @@ testExamples("parseChar", [
 		name: "no match",
 		parser: parseChar("b"),
 		input: "abc",
-		result: failParsing('Expected char "b".'),
+		result: failParsing(0, 'Expected char "b".'),
 	},
 	{
 		name: "match",
