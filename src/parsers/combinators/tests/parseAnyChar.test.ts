@@ -7,7 +7,7 @@ testExamples("parseAnyChar", [
 		name: "no match",
 		parser: parseAnyChar,
 		input: "",
-		result: failParsing(""),
+		result: failParsing("Unexpectedly reached end of file."),
 	},
 	{
 		name: "match",

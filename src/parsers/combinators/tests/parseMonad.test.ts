@@ -8,7 +8,7 @@ testExamples("parseMonad", [
 		name: "no match",
 		parser: parseMonad(parseAnyChar, createMonadResult),
 		input: "",
-		result: failParsing(""),
+		result: failParsing("Unexpectedly reached end of file."),
 	},
 	{
 		name: "match",
