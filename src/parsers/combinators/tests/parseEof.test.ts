@@ -7,13 +7,14 @@ testExamples("parseEof", [
 		name: "no match",
 		parser: parseEof,
 		input: "-",
-		result: failParsing(),
+		result: failParsing(""),
 	},
 	{
 		name: "match",
 		parser: parseEof,
 		input: "",
 		result: {
+			type: "success",
 			consumed: 0,
 			parsed: undefined,
 		},

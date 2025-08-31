@@ -1,23 +1,30 @@
-const parseFailure = Symbol("parseFailure");
-export type ParseFailure = typeof parseFailure;
+export type ParseFailure = {
+	type: "error";
+	message: string;
+};
 
-export type ParseResult<T> =
-	| {
-			consumed: number;
-			parsed: T;
-	  }
-	| ParseFailure;
+type ParsingSuccess<T> = {
+	type: "success";
+	consumed: number;
+	parsed: T;
+};
+
+export type ParseResult<T> = ParsingSuccess<T> | ParseFailure;
 
 export type ParserArgs = readonly [input: string, fromIndex: number];
 
 export type Parser<T> = (...args: ParserArgs) => ParseResult<T>;
 
-export function failParsing(): ParseFailure {
-	return parseFailure;
+export function failParsing(message: string): ParseFailure {
+	return { type: "error", message };
 }
 
-export function parsingFailed(
-	parseResult: unknown,
+// export function crerateParsingSuccess<T>(message: string): ParsingSuccess<> {
+// 	return { type: "error", message };
+// }
+
+export function parsingFailed<T>(
+	parseResult: ParseResult<T>,
 ): parseResult is ParseFailure {
-	return parseResult === parseFailure;
+	return parseResult.type === "error";
 }

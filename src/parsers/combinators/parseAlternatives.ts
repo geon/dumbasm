@@ -16,6 +16,6 @@ export function parseAlternatives<TParsers extends readonly Parser<unknown>[]>(
 			}
 		}
 
-		return failParsing();
+		return failParsing("");
 	};
 }

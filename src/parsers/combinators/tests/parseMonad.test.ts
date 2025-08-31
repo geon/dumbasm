@@ -8,7 +8,7 @@ testExamples("parseMonad", [
 		name: "no match",
 		parser: parseMonad(parseAnyChar, createMonadResult),
 		input: "",
-		result: failParsing(),
+		result: failParsing(""),
 	},
 	{
 		name: "match",
@@ -17,14 +17,15 @@ testExamples("parseMonad", [
 		),
 		input: "abc",
 		result: {
+			type: "success",
 			consumed: 1,
 			parsed: "A",
 		},
 	},
 	{
 		name: "refused",
-		parser: parseMonad(parseAnyChar, () => failParsing()),
+		parser: parseMonad(parseAnyChar, () => failParsing("")),
 		input: "abc",
-		result: failParsing(),
+		result: failParsing(""),
 	},
 ]);

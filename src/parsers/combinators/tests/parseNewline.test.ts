@@ -7,13 +7,14 @@ testExamples("parseNewline", [
 		name: "no match",
 		parser: parseNewline,
 		input: "-",
-		result: failParsing(),
+		result: failParsing(""),
 	},
 	{
 		name: "match",
 		parser: parseNewline,
 		input: "\n",
 		result: {
+			type: "success",
 			consumed: 1,
 			parsed: "\n",
 		},

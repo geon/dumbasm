@@ -7,7 +7,7 @@ testExamples("parseAnyChar", [
 		name: "no match",
 		parser: parseAnyChar,
 		input: "",
-		result: failParsing(),
+		result: failParsing(""),
 	},
 	{
 		name: "match",
@@ -15,6 +15,7 @@ testExamples("parseAnyChar", [
 		input: "abc",
 		fromIndex: 1,
 		result: {
+			type: "success",
 			consumed: 1,
 			parsed: "b",
 		},

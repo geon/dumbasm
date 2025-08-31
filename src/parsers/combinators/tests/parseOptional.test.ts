@@ -8,6 +8,7 @@ testExamples("parseOptional", [
 		parser: parseOptional(parseAnyChar),
 		input: "",
 		result: {
+			type: "success",
 			consumed: 0,
 			parsed: undefined,
 		},
@@ -17,6 +18,7 @@ testExamples("parseOptional", [
 		parser: parseOptional(parseAnyChar),
 		input: "abc",
 		result: {
+			type: "success",
 			consumed: 1,
 			parsed: "a",
 		},

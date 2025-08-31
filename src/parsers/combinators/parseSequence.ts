@@ -29,13 +29,14 @@ export function parseSequence<const Parsers extends readonly Parser<unknown>[]>(
 		for (const parser of parsers) {
 			const parseResult = parser(input, fromIndex + consumed);
 			if (parsingFailed(parseResult)) {
-				return failParsing();
+				return failParsing("");
 			}
 			consumed += parseResult.consumed;
 			parsed.push(parseResult.parsed);
 		}
 
 		return {
+			type: "success",
 			consumed,
 			parsed: parsed as SequenceResults<Parsers>,
 		};

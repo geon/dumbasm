@@ -7,13 +7,14 @@ testExamples("parseAnyCharBut", [
 		name: "no match",
 		parser: parseAnyCharBut("a"),
 		input: "abc",
-		result: failParsing(),
+		result: failParsing(""),
 	},
 	{
 		name: "match",
 		parser: parseAnyCharBut("b"),
 		input: "abc",
 		result: {
+			type: "success",
 			consumed: 1,
 			parsed: "a",
 		},

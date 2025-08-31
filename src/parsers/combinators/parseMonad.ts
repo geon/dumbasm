@@ -1,9 +1,4 @@
-import {
-	failParsing,
-	parsingFailed,
-	type ParseFailure,
-	type Parser,
-} from "./Parser.js";
+import { parsingFailed, type ParseFailure, type Parser } from "./Parser.js";
 
 type TransformResult<T> = {
 	readonly type: "result";
@@ -24,15 +19,16 @@ export function parseMonad<T, T2>(
 	return (input, fromIndex) => {
 		const parsed = parser(input, fromIndex);
 		if (parsingFailed(parsed)) {
-			return failParsing();
+			return parsed;
 		}
 
 		const transformed = transform(parsed.parsed);
-		if (parsingFailed(transformed)) {
-			return failParsing();
+		if (transformed.type === "error") {
+			return transformed;
 		}
 
 		return {
+			type: "success",
 			consumed: parsed.consumed,
 			parsed: transformed.value,
 		};

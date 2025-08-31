@@ -14,13 +14,14 @@ testExamples("parseChar", [
 		name: "no match",
 		parser: parseChar("b"),
 		input: "abc",
-		result: failParsing(),
+		result: failParsing(""),
 	},
 	{
 		name: "match",
 		parser: parseChar("a"),
 		input: "abc",
 		result: {
+			type: "success",
 			consumed: 1,
 			parsed: "a",
 		},

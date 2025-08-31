@@ -9,6 +9,7 @@ testExamples<readonly string[]>("parseSequence", [
 		parser: parseSequence([]),
 		input: "abc",
 		result: {
+			type: "success",
 			consumed: 0,
 			parsed: [],
 		},
@@ -17,13 +18,14 @@ testExamples<readonly string[]>("parseSequence", [
 		name: "no match",
 		parser: parseSequence([parseAnyChar]),
 		input: "",
-		result: failParsing(),
+		result: failParsing(""),
 	},
 	{
 		name: "match",
 		parser: parseSequence([parseAnyChar]),
 		input: "abc",
 		result: {
+			type: "success",
 			consumed: 1,
 			parsed: ["a"],
 		},
@@ -33,6 +35,7 @@ testExamples<readonly string[]>("parseSequence", [
 		parser: parseSequence([parseAnyChar, parseAnyChar, parseAnyChar]),
 		input: "abc",
 		result: {
+			type: "success",
 			consumed: 3,
 			parsed: ["a", "b", "c"],
 		},

@@ -9,19 +9,20 @@ testExamples("parseAlternatives", [
 		parser: parseAlternatives([]),
 		input: "abc",
 		// TODO: Throw instead. The problem is invalid input.
-		result: failParsing(),
+		result: failParsing(""),
 	},
 	{
 		name: "no match",
 		parser: parseAlternatives([parseAnyChar]),
 		input: "",
-		result: failParsing(),
+		result: failParsing(""),
 	},
 	{
 		name: "match first",
 		parser: parseAlternatives([parseAnyChar, parseAnyChar]),
 		input: "abc",
 		result: {
+			type: "success",
 			consumed: 1,
 			parsed: "a",
 		},
@@ -31,6 +32,7 @@ testExamples("parseAlternatives", [
 		parser: parseAlternatives([parseAnyChar, parseAnyChar]),
 		input: "abc",
 		result: {
+			type: "success",
 			consumed: 1,
 			parsed: "a",
 		},

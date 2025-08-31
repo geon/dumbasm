@@ -8,6 +8,6 @@ export function parseChar<Char extends string>(char: Char): Parser<Char> {
 	}
 
 	return parseMonad(parseAnyChar, (parsed) =>
-		parsed !== char ? failParsing() : createMonadResult(char),
+		parsed !== char ? failParsing("") : createMonadResult(char),
 	);
 }
