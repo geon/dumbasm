@@ -7,7 +7,7 @@ testExamples("parseNewline", [
 		name: "no match",
 		parser: parseNewline,
 		input: "-",
-		result: failParsing(""),
+		result: failParsing('Expected char "\\n".'),
 	},
 	{
 		name: "match",
