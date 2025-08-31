@@ -7,4 +7,4 @@ export const parseEof: Parser<undefined> = (input, fromIndex) =>
 				consumed: 0,
 				parsed: undefined,
 			}
-		: failParsing("");
+		: failParsing("Expected end of file.");
