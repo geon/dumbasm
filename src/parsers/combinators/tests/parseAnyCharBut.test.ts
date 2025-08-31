@@ -7,7 +7,7 @@ testExamples("parseAnyCharBut", [
 		name: "no match",
 		parser: parseAnyCharBut("a"),
 		input: "abc",
-		result: failParsing(""),
+		result: failParsing('Expected any char but "a".'),
 	},
 	{
 		name: "match",
