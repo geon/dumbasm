@@ -1,18 +1,20 @@
 import { parseAnyChar } from "../parseAnyChar.js";
-import { parseMonad } from "../parseMonad.js";
+import { createMonadResult, parseMonad } from "../parseMonad.js";
 import { failParsing } from "../Parser.js";
 import { testExamples } from "./testExamples.js";
 
 testExamples("parseMonad", [
 	{
 		name: "no match",
-		parser: parseMonad(parseAnyChar, (x) => x),
+		parser: parseMonad(parseAnyChar, createMonadResult),
 		input: "",
 		result: failParsing(),
 	},
 	{
 		name: "match",
-		parser: parseMonad(parseAnyChar, (parsed) => parsed.toUpperCase()),
+		parser: parseMonad(parseAnyChar, (parsed) =>
+			createMonadResult(parsed.toUpperCase()),
+		),
 		input: "abc",
 		result: {
 			consumed: 1,

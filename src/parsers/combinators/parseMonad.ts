@@ -5,10 +5,22 @@ import {
 	type Parser,
 } from "./Parser.js";
 
+type TransformResult<T> = {
+	readonly type: "result";
+	readonly value: T;
+};
+
+export function createMonadResult<T>(value: T): TransformResult<T> {
+	return {
+		type: "result",
+		value,
+	};
+}
+
 export function parseMonad<T, T2>(
 	parser: Parser<T>,
-	transform: (parsed: T) => T2 | ParseFailure,
-): Parser<Exclude<T2, ParseFailure>> {
+	transform: (parsed: T) => TransformResult<T2> | ParseFailure,
+): Parser<T2> {
 	return (input, fromIndex) => {
 		const parsed = parser(input, fromIndex);
 		if (parsingFailed(parsed)) {
@@ -22,7 +34,7 @@ export function parseMonad<T, T2>(
 
 		return {
 			consumed: parsed.consumed,
-			parsed: transformed as Exclude<T2, ParseFailure>,
+			parsed: transformed.value,
 		};
 	};
 }
