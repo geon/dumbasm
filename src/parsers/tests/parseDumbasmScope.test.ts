@@ -13,4 +13,10 @@ testExamples("parseDumbasmScope", [
 		parser: parseDumbasmScope,
 		result: createParseResult(2, []),
 	},
+	{
+		name: "{\\n}",
+		input: "{\n}",
+		parser: parseDumbasmScope,
+		result: createParseResult(3, []),
+	},
 ]);
