@@ -1,9 +1,4 @@
-import {
-	failParsing,
-	parsingFailed,
-	type ParseFailure,
-	type Parser,
-} from "./Parser.js";
+import { parsingFailed, type ParseFailure, type Parser } from "./Parser.js";
 
 type Tail<T extends readonly unknown[]> = T extends readonly [
 	unknown,
@@ -29,7 +24,7 @@ export function parseSequence<const Parsers extends readonly Parser<unknown>[]>(
 		for (const parser of parsers) {
 			const parseResult = parser(input, fromIndex + consumed);
 			if (parsingFailed(parseResult)) {
-				return failParsing("");
+				return parseResult;
 			}
 			consumed += parseResult.consumed;
 			parsed.push(parseResult.parsed);
