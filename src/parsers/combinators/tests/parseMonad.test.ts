@@ -1,5 +1,9 @@
 import { parseAnyChar } from "../parseAnyChar.js";
-import { createMonadResult, parseMonad } from "../parseMonad.js";
+import {
+	createMonadError,
+	createMonadResult,
+	parseMonad,
+} from "../parseMonad.js";
 import { failParsing } from "../Parser.js";
 import { testExamples } from "./testExamples.js";
 
@@ -24,7 +28,7 @@ testExamples("parseMonad", [
 	},
 	{
 		name: "refused",
-		parser: parseMonad(parseAnyChar, () => failParsing("Custom message.")),
+		parser: parseMonad(parseAnyChar, () => createMonadError("Custom message.")),
 		input: "abc",
 		result: failParsing("Custom message."),
 	},

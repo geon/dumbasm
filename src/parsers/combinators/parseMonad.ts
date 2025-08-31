@@ -1,9 +1,14 @@
-import { parsingFailed, type ParseFailure, type Parser } from "./Parser.js";
+import { failParsing, parsingFailed, type Parser } from "./Parser.js";
 
-type TransformResult<T> = {
-	readonly type: "result";
-	readonly value: T;
-};
+type TransformResult<T> =
+	| {
+			readonly type: "result";
+			readonly value: T;
+	  }
+	| {
+			readonly type: "monad error";
+			readonly message: string;
+	  };
 
 export function createMonadResult<T>(value: T): TransformResult<T> {
 	return {
@@ -12,9 +17,16 @@ export function createMonadResult<T>(value: T): TransformResult<T> {
 	};
 }
 
+export function createMonadError<T>(message: string): TransformResult<T> {
+	return {
+		type: "monad error",
+		message,
+	};
+}
+
 export function parseMonad<T, T2>(
 	parser: Parser<T>,
-	transform: (parsed: T) => TransformResult<T2> | ParseFailure,
+	transform: (parsed: T) => TransformResult<T2>,
 ): Parser<T2> {
 	return (input, fromIndex) => {
 		const parsed = parser(input, fromIndex);
@@ -23,8 +35,8 @@ export function parseMonad<T, T2>(
 		}
 
 		const transformed = transform(parsed.parsed);
-		if (transformed.type === "error") {
-			return transformed;
+		if (transformed.type === "monad error") {
+			return failParsing(transformed.message);
 		}
 
 		return {

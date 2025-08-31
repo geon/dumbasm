@@ -1,6 +1,10 @@
 import { parseAnyChar } from "./parseAnyChar.js";
-import { createMonadResult, parseMonad } from "./parseMonad.js";
-import { failParsing, type Parser } from "./Parser.js";
+import {
+	createMonadError,
+	createMonadResult,
+	parseMonad,
+} from "./parseMonad.js";
+import { type Parser } from "./Parser.js";
 
 export function parseChar<Char extends string>(char: Char): Parser<Char> {
 	if (char.length !== 1) {
@@ -9,7 +13,7 @@ export function parseChar<Char extends string>(char: Char): Parser<Char> {
 
 	return parseMonad(parseAnyChar, (parsed) =>
 		parsed !== char
-			? failParsing(`Expected char ${JSON.stringify(char)}.`)
+			? createMonadError(`Expected char ${JSON.stringify(char)}.`)
 			: createMonadResult(char),
 	);
 }
