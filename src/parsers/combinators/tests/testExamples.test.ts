@@ -10,9 +10,9 @@ const match: ParseResult<"match"> = {
 testExamples("testExamples", [
 	{
 		name: "no match",
-		parser: () => failParsing(""),
+		parser: () => failParsing("foo"),
 		input: "",
-		result: failParsing(""),
+		result: failParsing("foo"),
 	},
 	{
 		name: "match",
