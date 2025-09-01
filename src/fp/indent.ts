@@ -1,5 +1,9 @@
 const indentChar = "\t";
+const newlineChar = "\n";
 
-export function indent(_text: string): string {
-	return indentChar;
+export function indent(text: string): string {
+	return text
+		.split(newlineChar)
+		.map((line) => indentChar + line)
+		.join(newlineChar);
 }
