@@ -2,8 +2,9 @@ import { parseOneOrMore, parseZeroOrMore } from "../parseSome.js";
 import { parseChar } from "../parseChar.js";
 import { testExamples } from "./testExamples.js";
 import { createParseError, createParseResult } from "../Parser.js";
+import { parseEof } from "../parseEof.js";
 
-testExamples<readonly string[]>("parseSome", [
+testExamples<readonly string[] | readonly undefined[]>("parseSome", [
 	{
 		name: "parseOneOrMore > match",
 		parser: parseOneOrMore(parseChar("a")),
@@ -27,5 +28,11 @@ testExamples<readonly string[]>("parseSome", [
 		parser: parseZeroOrMore(parseChar("b")),
 		input: "abc",
 		result: createParseResult(0, []),
+	},
+	{
+		name: "zero-width",
+		parser: parseOneOrMore(parseEof),
+		input: "",
+		result: createParseResult(0, [undefined]),
 	},
 ]);
