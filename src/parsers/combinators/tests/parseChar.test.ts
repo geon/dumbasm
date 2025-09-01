@@ -24,7 +24,13 @@ testExamples("parseChar", [
 		result: createParseResult(1, "a"),
 	},
 	{
-		name: "case insensitive",
+		name: "no match case insensitive",
+		parser: parseCharCaseInsensitive("b"),
+		input: "abc",
+		result: createParseError(0, 'Expected char "b".'),
+	},
+	{
+		name: "match case insensitive",
 		parser: parseCharCaseInsensitive("A"),
 		input: "abc",
 		result: createParseResult(1, "A"),
