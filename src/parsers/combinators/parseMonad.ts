@@ -1,4 +1,9 @@
-import { createParseResult, parsingFailed, type Parser } from "./Parser.js";
+import {
+	createParseError,
+	createParseResult,
+	parsingFailed,
+	type Parser,
+} from "./Parser.js";
 
 type TransformError = {
 	readonly type: "monad error";
@@ -47,6 +52,6 @@ export function parseMonad<T, T2>(
 			return createParseResult(parsed.consumed, transformed.value);
 		}
 
-		throw new Error("Not implemented.");
+		return createParseError(fromIndex, transformed.message);
 	};
 }

@@ -19,4 +19,10 @@ testExamples("parseMonad", [
 		input: "abc",
 		result: createParseResult(1, "A"),
 	},
+	{
+		name: "refused",
+		parser: parseMonad(parseAnyChar, (_, { error }) => error("custom error")),
+		input: "abc",
+		result: createParseError(0, "custom error"),
+	},
 ]);
