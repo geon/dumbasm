@@ -5,4 +5,10 @@ suite("indent", () => {
 	test("empty", () => {
 		expect(indent("")).toBe("\t");
 	});
+	test("one line", () => {
+		expect(indent("one line")).toBe("\tone line");
+	});
+	test("two\\nlines", () => {
+		expect(indent("two\nlines")).toBe("\ttwo\n\tlines");
+	});
 });
