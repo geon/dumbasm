@@ -34,6 +34,9 @@ export function parseSequence<const Parsers extends readonly Parser<unknown>[]>(
 			return parseResult;
 		}
 
-		throw new Error("Not implemented.");
+		const consumed = parseResult.consumed;
+		const parsed = [parseResult.parsed];
+
+		return createParseResult(consumed, parsed as SequenceResults<Parsers>);
 	};
 }

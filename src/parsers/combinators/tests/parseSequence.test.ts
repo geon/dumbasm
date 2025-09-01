@@ -1,3 +1,4 @@
+import { parseAnyChar } from "../parseAnyChar.js";
 import { parseError } from "../parseError.js";
 import { createParseError, createParseResult } from "../Parser.js";
 import { parseSequence } from "../parseSequence.js";
@@ -15,5 +16,11 @@ testExamples<readonly string[]>("parseSequence", [
 		parser: parseSequence([parseError]),
 		input: "",
 		result: createParseError(0, "forced error"),
+	},
+	{
+		name: "match",
+		parser: parseSequence([parseAnyChar]),
+		input: "abc",
+		result: createParseResult(1, ["a"]),
 	},
 ]);
