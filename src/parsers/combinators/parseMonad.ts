@@ -1,4 +1,4 @@
-import { parsingFailed, type Parser } from "./Parser.js";
+import { createParseResult, parsingFailed, type Parser } from "./Parser.js";
 
 type TransformError = {
 	readonly type: "monad error";
@@ -12,9 +12,23 @@ type TransformSuccess<T> = {
 
 type TransformResult<T> = TransformSuccess<T> | TransformError;
 
+function result<T2>(value: T2): TransformSuccess<T2> {
+	return {
+		type: "result",
+		value,
+	};
+}
+
+function error(message: string): TransformError {
+	return {
+		type: "monad error",
+		message,
+	};
+}
+
 export function parseMonad<T, T2>(
 	parser: Parser<T>,
-	_transform: (
+	transform: (
 		parsed: T,
 		constructors: {
 			readonly result: <T2>(value: T2) => TransformSuccess<T2>;
@@ -26,6 +40,11 @@ export function parseMonad<T, T2>(
 		const parsed = parser(input, fromIndex);
 		if (parsingFailed(parsed)) {
 			return parsed;
+		}
+
+		const transformed = transform(parsed.parsed, { result, error });
+		if (transformed.type === "result") {
+			return createParseResult(parsed.consumed, transformed.value);
 		}
 
 		throw new Error("Not implemented.");
