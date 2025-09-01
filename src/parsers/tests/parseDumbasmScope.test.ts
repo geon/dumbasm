@@ -50,4 +50,14 @@ testExamples<ParsedFile>("parseDumbasmScope", [
 			},
 		]),
 	},
+	{
+		input: "{{}}",
+		parser: parseDumbasmScope,
+		result: createParseResult(4, [
+			{
+				type: "scope",
+				value: [],
+			},
+		]),
+	},
 ]);
