@@ -25,8 +25,16 @@ function parseSome<T>(parser: Parser<T>, min: number): Parser<readonly T[]> {
 				errorMessage = parseResult.message;
 				break;
 			}
+
 			consumed += parseResult.consumed;
 			parsed.push(parseResult.parsed);
+
+			// Prevent infinite loop on zero-width parsers.
+			// When nothing is consumed, the same input would match again, inifinitely.
+			if (!parseResult.consumed) {
+				errorMessage = "Stopped after zero-width match.";
+				break;
+			}
 		}
 
 		if (parsed.length < min) {
