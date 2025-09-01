@@ -8,8 +8,13 @@ import { parseOneOrMore } from "./combinators/parseSome.js";
 import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
 import { parseAsmLine, type AsmFragment } from "./parseAsmLine.js";
 import { parseDumbasmLine, type DumbasmFragment } from "./parseDumbasmLine.js";
+import { parseDumbasmScope } from "./parseDumbasmScope.js";
 
-export type ParsedFile = readonly (AsmFragment | DumbasmFragment)[];
+export type ParsedFile = readonly (
+	| AsmFragment
+	| DumbasmFragment
+	| { readonly type: "scope"; readonly value: ParsedFile }
+)[];
 
 export function parseFile(...args: ParserArgs): ParseResult<ParsedFile> {
 	return parseWithErrorMessage(
@@ -20,6 +25,9 @@ export function parseFile(...args: ParserArgs): ParseResult<ParsedFile> {
 					parseKeyed({
 						asm: parseAsmLine,
 						dumbasm: parseDumbasmLine,
+						scope: parseMonad(parseDumbasmScope, (scope, { result }) =>
+							result({ type: "scope", value: scope } as const),
+						),
 						newline: parseNewline,
 					}),
 				),

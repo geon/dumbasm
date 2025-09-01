@@ -54,6 +54,17 @@ testExamples<ParsedFile>("parseFile", [
 			},
 		]),
 	},
+	{
+		name: "scope",
+		input: "{}",
+		parser: parseFile,
+		result: createParseResult(2, [
+			{
+				type: "scope",
+				value: [],
+			},
+		]),
+	},
 ]);
 
 suite("parseFile", () => {

@@ -22,7 +22,7 @@ function parse(fileContents: string) {
 	}
 
 	const asmFragments = parsed.parsed.map((fragment) => {
-		if (fragment.type === "variableDeclaration") {
+		if (fragment.type === "variableDeclaration" || fragment.type === "scope") {
 			throw new Error("Not implemented.");
 		}
 		return fragment;
