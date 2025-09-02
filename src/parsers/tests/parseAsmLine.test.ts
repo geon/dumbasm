@@ -25,4 +25,14 @@ testExamples<readonly AsmFragment[]>("parseAsmLine", [
 			},
 		]),
 	},
+	{
+		input: ".byte 123",
+		parser: parseAsmLine,
+		result: createParseResult(9, [
+			{
+				type: "directive",
+				value: ".byte 123",
+			},
+		]),
+	},
 ]);
