@@ -16,29 +16,31 @@ export type ParsedFile = readonly (
 	| { readonly type: "scope"; readonly value: ParsedFile }
 )[];
 
+export const parseLines = parseMonad(
+	parseOneOrMore(
+		parseKeyed({
+			asm: parseAsmLine,
+			dumbasm: parseDumbasmLine,
+			scope: parseMonad(parseDumbasmScope, (scope, { result }) =>
+				result({ type: "scope", value: scope } as const),
+			),
+			newline: parseNewline,
+		}),
+	),
+	(matches, { result }) =>
+		result(
+			matches
+				.filter((match) => match.type !== "newline")
+				.map((match) => match.value)
+				.flat(),
+		),
+);
+
 export function parseFile(...args: ParserArgs): ParseResult<ParsedFile> {
 	return parseWithErrorMessage(
 		"SYNTAX ERROR",
 		parseAlternatives([
-			parseMonad(
-				parseOneOrMore(
-					parseKeyed({
-						asm: parseAsmLine,
-						dumbasm: parseDumbasmLine,
-						scope: parseMonad(parseDumbasmScope, (scope, { result }) =>
-							result({ type: "scope", value: scope } as const),
-						),
-						newline: parseNewline,
-					}),
-				),
-				(matches, { result }) =>
-					result(
-						matches
-							.filter((match) => match.type !== "newline")
-							.map((match) => match.value)
-							.flat(),
-					),
-			),
+			parseLines,
 			parseMonad(parseEof, (_, { result }) => result([])),
 		]),
 	)(...args);
