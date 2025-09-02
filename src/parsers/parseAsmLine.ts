@@ -1,7 +1,11 @@
-import { parseError } from "./combinators/parseError.js";
+import { parseKeyed } from "./combinators/parseKeyed.js";
+import { parseMonad } from "./combinators/parseMonad.js";
 import type { Parser } from "./combinators/Parser.js";
 import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
-import { type ParsedMos6502Instruction } from "./parseMos6502Instruction.js";
+import {
+	parseMos6502Instruction,
+	type ParsedMos6502Instruction,
+} from "./parseMos6502Instruction.js";
 
 export type AsmFragment =
 	| {
@@ -21,5 +25,10 @@ export const parseAsmLine: Parser<readonly AsmFragment[]> =
 	parseWithErrorMessage(
 		//
 		"Expected asm code line.",
-		parseError,
+		parseMonad(
+			parseKeyed({
+				instruction: parseMos6502Instruction,
+			}),
+			(asmFragment, { result }) => result([asmFragment]),
+		),
 	);

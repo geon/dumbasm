@@ -1,12 +1,25 @@
-import { parseAsmLine } from "../parseAsmLine.js";
+import { parseAsmLine, type AsmFragment } from "../parseAsmLine.js";
 import { testExamples } from "../combinators/tests/testExamples.js";
-import { createParseError } from "../combinators/Parser.js";
+import { createParseError, createParseResult } from "../combinators/Parser.js";
 
-testExamples("parseAsmLine", [
+testExamples<readonly AsmFragment[]>("parseAsmLine", [
 	{
 		name: "empty line",
 		input: "",
 		parser: parseAsmLine,
 		result: createParseError(0, "Expected asm code line."),
+	},
+	{
+		input: "inc",
+		parser: parseAsmLine,
+		result: createParseResult(3, [
+			{
+				type: "instruction",
+				value: {
+					mnemonic: "inc",
+					operand: undefined,
+				},
+			},
+		]),
 	},
 ]);
