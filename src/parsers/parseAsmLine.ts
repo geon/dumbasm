@@ -22,15 +22,15 @@ export type AsmFragment =
 			readonly value: string;
 	  };
 
+const parseInstrOrDir = parseKeyed({
+	instruction: parseMos6502Instruction,
+	directive: parseDirective,
+});
+
 export const parseAsmLine: Parser<readonly AsmFragment[]> =
 	parseWithErrorMessage(
-		//
 		"Expected asm code line.",
-		parseMonad(
-			parseKeyed({
-				instruction: parseMos6502Instruction,
-				directive: parseDirective,
-			}),
-			(asmFragment, { result }) => result([asmFragment]),
+		parseMonad(parseInstrOrDir, (asmFragment, { result }) =>
+			result([asmFragment]),
 		),
 	);
