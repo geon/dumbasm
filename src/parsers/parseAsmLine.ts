@@ -63,5 +63,6 @@ export const parseAsmLine: Parser<readonly AsmFragment[]> =
 				parseSequence([parseOptional(parseWhitespace), parseComment]),
 				(_, { result }) => result([]),
 			),
+			parseMonad(parseWhitespace, (_, { result }) => result([])),
 		]),
 	);

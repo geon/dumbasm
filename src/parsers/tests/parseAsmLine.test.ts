@@ -80,4 +80,10 @@ testExamples<readonly AsmFragment[]>("parseAsmLine", [
 		parser: parseAsmLine,
 		result: createParseResult(9, []),
 	},
+	{
+		name: "whitespace",
+		input: " ",
+		parser: parseAsmLine,
+		result: createParseResult(1, []),
+	},
 ]);
