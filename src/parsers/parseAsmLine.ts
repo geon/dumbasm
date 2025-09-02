@@ -2,6 +2,7 @@ import { parseKeyed } from "./combinators/parseKeyed.js";
 import { parseMonad } from "./combinators/parseMonad.js";
 import type { Parser } from "./combinators/Parser.js";
 import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
+import { parseDirective } from "./parseDirective.js";
 import {
 	parseMos6502Instruction,
 	type ParsedMos6502Instruction,
@@ -28,6 +29,7 @@ export const parseAsmLine: Parser<readonly AsmFragment[]> =
 		parseMonad(
 			parseKeyed({
 				instruction: parseMos6502Instruction,
+				directive: parseDirective,
 			}),
 			(asmFragment, { result }) => result([asmFragment]),
 		),
