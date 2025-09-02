@@ -37,25 +37,31 @@ const parseInstrOrDir = parseKeyed({
 export const parseAsmLine: Parser<readonly AsmFragment[]> =
 	parseWithErrorMessage(
 		"Expected asm code line.",
-		parseSequenceIndex(0, [
-			parseAlternatives([
-				parseMonad(
-					parseSequence([
-						parseLabel,
-						parseOptional(parseWhitespace),
-						parseInstrOrDir,
-					]),
-					([label, , instrOrDir], { result }) =>
-						result([{ type: "label" as const, value: label }, instrOrDir]),
-				),
-				parseMonad(parseLabel, (value, { result }) =>
-					result([{ type: "label" as const, value }]),
-				),
-				parseMonad(parseInstrOrDir, (asmFragment, { result }) =>
-					result([asmFragment]),
-				),
+		parseAlternatives([
+			parseSequenceIndex(0, [
+				parseAlternatives([
+					parseMonad(
+						parseSequence([
+							parseLabel,
+							parseOptional(parseWhitespace),
+							parseInstrOrDir,
+						]),
+						([label, , instrOrDir], { result }) =>
+							result([{ type: "label" as const, value: label }, instrOrDir]),
+					),
+					parseMonad(parseLabel, (value, { result }) =>
+						result([{ type: "label" as const, value }]),
+					),
+					parseMonad(parseInstrOrDir, (asmFragment, { result }) =>
+						result([asmFragment]),
+					),
+				]),
+				parseOptional(parseWhitespace),
+				parseOptional(parseComment),
 			]),
-			parseOptional(parseWhitespace),
-			parseOptional(parseComment),
+			parseMonad(
+				parseSequence([parseOptional(parseWhitespace), parseComment]),
+				(_, { result }) => result([]),
+			),
 		]),
 	);
