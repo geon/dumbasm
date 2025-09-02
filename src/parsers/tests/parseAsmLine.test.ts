@@ -75,4 +75,9 @@ testExamples<readonly AsmFragment[]>("parseAsmLine", [
 			},
 		]),
 	},
+	{
+		input: "; Comment",
+		parser: parseAsmLine,
+		result: createParseResult(9, []),
+	},
 ]);
