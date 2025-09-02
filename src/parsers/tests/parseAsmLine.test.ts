@@ -35,4 +35,14 @@ testExamples<readonly AsmFragment[]>("parseAsmLine", [
 			},
 		]),
 	},
+	{
+		input: "myLabel:",
+		parser: parseAsmLine,
+		result: createParseResult(8, [
+			{
+				type: "label",
+				value: "myLabel",
+			},
+		]),
+	},
 ]);

@@ -1,8 +1,10 @@
+import { parseAlternatives } from "./combinators/parseAlternatives.js";
 import { parseKeyed } from "./combinators/parseKeyed.js";
 import { parseMonad } from "./combinators/parseMonad.js";
 import type { Parser } from "./combinators/Parser.js";
 import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
 import { parseDirective } from "./parseDirective.js";
+import { parseLabel } from "./parseLabel.js";
 import {
 	parseMos6502Instruction,
 	type ParsedMos6502Instruction,
@@ -30,7 +32,12 @@ const parseInstrOrDir = parseKeyed({
 export const parseAsmLine: Parser<readonly AsmFragment[]> =
 	parseWithErrorMessage(
 		"Expected asm code line.",
-		parseMonad(parseInstrOrDir, (asmFragment, { result }) =>
-			result([asmFragment]),
-		),
+		parseAlternatives([
+			parseMonad(parseLabel, (value, { result }) =>
+				result([{ type: "label" as const, value }]),
+			),
+			parseMonad(parseInstrOrDir, (asmFragment, { result }) =>
+				result([asmFragment]),
+			),
+		]),
 	);
