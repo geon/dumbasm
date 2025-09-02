@@ -4,8 +4,10 @@ import { parseMonad } from "./combinators/parseMonad.js";
 import { parseOptional } from "./combinators/parseOptional.js";
 import type { Parser } from "./combinators/Parser.js";
 import { parseSequence } from "./combinators/parseSequence.js";
+import { parseSequenceIndex } from "./combinators/parseSequenceIndex.js";
 import { parseWhitespace } from "./combinators/parseWhitespace.js";
 import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
+import { parseComment } from "./parseComment.js";
 import { parseDirective } from "./parseDirective.js";
 import { parseLabel } from "./parseLabel.js";
 import {
@@ -35,21 +37,25 @@ const parseInstrOrDir = parseKeyed({
 export const parseAsmLine: Parser<readonly AsmFragment[]> =
 	parseWithErrorMessage(
 		"Expected asm code line.",
-		parseAlternatives([
-			parseMonad(
-				parseSequence([
-					parseLabel,
-					parseOptional(parseWhitespace),
-					parseInstrOrDir,
-				]),
-				([label, , instrOrDir], { result }) =>
-					result([{ type: "label" as const, value: label }, instrOrDir]),
-			),
-			parseMonad(parseLabel, (value, { result }) =>
-				result([{ type: "label" as const, value }]),
-			),
-			parseMonad(parseInstrOrDir, (asmFragment, { result }) =>
-				result([asmFragment]),
-			),
+		parseSequenceIndex(0, [
+			parseAlternatives([
+				parseMonad(
+					parseSequence([
+						parseLabel,
+						parseOptional(parseWhitespace),
+						parseInstrOrDir,
+					]),
+					([label, , instrOrDir], { result }) =>
+						result([{ type: "label" as const, value: label }, instrOrDir]),
+				),
+				parseMonad(parseLabel, (value, { result }) =>
+					result([{ type: "label" as const, value }]),
+				),
+				parseMonad(parseInstrOrDir, (asmFragment, { result }) =>
+					result([asmFragment]),
+				),
+			]),
+			parseOptional(parseWhitespace),
+			parseOptional(parseComment),
 		]),
 	);

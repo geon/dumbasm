@@ -56,4 +56,17 @@ testExamples<readonly AsmFragment[]>("parseAsmLine", [
 			},
 		]),
 	},
+	{
+		input: "inc ; Comment",
+		parser: parseAsmLine,
+		result: createParseResult(13, [
+			{
+				type: "instruction",
+				value: {
+					mnemonic: "inc",
+					operand: undefined,
+				},
+			},
+		]),
+	},
 ]);
