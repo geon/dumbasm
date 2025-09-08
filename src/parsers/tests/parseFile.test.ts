@@ -77,4 +77,10 @@ suite("parseFile", () => {
 		expect(parsingFailed(parsed)).toBe(false);
 		expect(parsed).toMatchSnapshot();
 	});
+
+	// test("ca65 syntax", () => {
+	// 	const parsed = parseFile(asmSamples.ca65Syntax, 0);
+	// 	expect(parsingFailed(parsed)).toBe(false);
+	// 	expect(parsed).toMatchSnapshot();
+	// });
 });
