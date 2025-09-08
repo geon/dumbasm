@@ -1,3 +1,5 @@
-export function getLineBeginIndex(_input: string, _fromIndex: number) {
-	return 0;
+export function getLineBeginIndex(input: string, fromIndex: number) {
+	const lastIndex = input.lastIndexOf("\n", fromIndex - 1);
+
+	return lastIndex + 1;
 }
