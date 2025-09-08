@@ -57,4 +57,10 @@ testExamples<ParsedFile>("parseFile", [
 			},
 		]),
 	},
+	{
+		name: "tax \\n then nonsense",
+		input: "tax \n then nonsense",
+		parser: parseFile,
+		result: createParseError(6, "SYNTAX ERROR"),
+	},
 ]);

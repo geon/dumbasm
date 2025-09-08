@@ -3,7 +3,8 @@ import { parseEof } from "./combinators/parseEof.js";
 import { parseMonad } from "./combinators/parseMonad.js";
 import { parseNewline } from "./combinators/parseNewline.js";
 import { type ParserArgs, type ParseResult } from "./combinators/Parser.js";
-import { parseOneOrMore } from "./combinators/parseSome.js";
+import { parseSequenceIndex } from "./combinators/parseSequenceIndex.js";
+import { parseZeroOrMore } from "./combinators/parseSome.js";
 import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
 import { parseAsmLine, type AsmFragment } from "./parseAsmLine.js";
 
@@ -12,9 +13,9 @@ export type ParsedFile = readonly AsmFragment[];
 export function parseFile(...args: ParserArgs): ParseResult<ParsedFile> {
 	return parseWithErrorMessage(
 		"SYNTAX ERROR",
-		parseAlternatives([
+		parseSequenceIndex(0, [
 			parseMonad(
-				parseOneOrMore(
+				parseZeroOrMore(
 					parseAlternatives([
 						//
 						parseAsmLine,
