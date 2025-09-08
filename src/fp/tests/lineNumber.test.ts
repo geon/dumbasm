@@ -2,6 +2,7 @@ import { suite, test, expect } from "vitest";
 import {
 	countOccurenceOfChar,
 	getLineBeginIndex,
+	getLineCol,
 	getLineEndIndex,
 } from "../lineNumber";
 
@@ -37,6 +38,26 @@ suite("lineNumber", () => {
 
 		test("hello world", () => {
 			expect(countOccurenceOfChar("o", "hello world", 2)).toBe(0);
+		});
+	});
+
+	suite("getLineCol", () => {
+		test("empty", () => {
+			expect(getLineCol("", 0)).toStrictEqual({
+				lineBeginIndex: 0,
+				lineEndIndex: undefined,
+				columnNumber: 1,
+				lineNumber: 1,
+			});
+		});
+
+		test("text after newlines", () => {
+			expect(getLineCol("\n\ntext\n", 3)).toStrictEqual({
+				lineBeginIndex: 2,
+				lineEndIndex: 6,
+				columnNumber: 2,
+				lineNumber: 3,
+			});
 		});
 	});
 });

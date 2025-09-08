@@ -24,3 +24,11 @@ export function countOccurenceOfChar(
 ): number {
 	return input.slice(0, toIndex).split(char).length - 1;
 }
+
+export function getLineCol(input: string, fromIndex: number) {
+	const lineBeginIndex = getLineBeginIndex(input, fromIndex);
+	const lineEndIndex = getLineEndIndex(input, fromIndex);
+	const columnNumber = fromIndex - lineBeginIndex + 1;
+	const lineNumber = countOccurenceOfChar("\n", input, fromIndex) + 1;
+	return { lineBeginIndex, lineEndIndex, columnNumber, lineNumber };
+}
