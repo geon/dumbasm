@@ -53,6 +53,14 @@ testExamples("lowerDumdasm", [
 			tax
 		`,
 	},
+	{
+		name: "conflicting variable register location",
+		input: `
+			regA uint8 foo
+			regA uint8 bar
+		`,
+		result: undefined,
+	},
 ]);
 
 export type Example = Readonly<{

@@ -35,14 +35,24 @@ function allocateVariables(
 
 	const allocations: Record<string, VariableAllocation> = {};
 
+	const allocatedRegisters = new Set<RegisterName>();
+
 	for (const [name, variable] of Object.entries(variables)) {
-		allocations[name] =
-			variable.location === "zeroPage" || variable.location === undefined
-				? { type: "address", address: 1234 }
-				: {
-						type: "reg",
-						reg: variable.location[3] as RegisterName,
-					};
+		if (variable.location === "zeroPage" || variable.location === undefined) {
+			allocations[name] = { type: "address", address: 1234 };
+		} else {
+			const registerName = variable.location[3] as RegisterName;
+
+			if (allocatedRegisters.has(registerName)) {
+				return undefined;
+			}
+			allocatedRegisters.add(registerName);
+
+			allocations[name] = {
+				type: "reg",
+				reg: registerName,
+			};
+		}
 	}
 
 	return allocations;
