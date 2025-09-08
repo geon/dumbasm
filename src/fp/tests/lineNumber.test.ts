@@ -20,5 +20,9 @@ suite("lineNumber", () => {
 		test("empty", () => {
 			expect(getLineEndIndex("", 0)).toBe(undefined);
 		});
+
+		test("newline", () => {
+			expect(getLineEndIndex("\n", 0)).toBe(0);
+		});
 	});
 });

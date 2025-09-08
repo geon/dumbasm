@@ -8,6 +8,11 @@ export function getLineBeginIndex(input: string, fromIndex: number) {
 	return lastIndex + 1;
 }
 
-export function getLineEndIndex(_input: string, _fromIndex: number) {
-	return undefined;
+export function getLineEndIndex(input: string, fromIndex: number) {
+	const index = input.indexOf("\n", fromIndex);
+	if (index === -1) {
+		return undefined;
+	}
+
+	return index;
 }
