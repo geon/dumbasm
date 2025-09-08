@@ -18,9 +18,9 @@ export function getLineEndIndex(input: string, fromIndex: number) {
 }
 
 export function countOccurenceOfChar(
-	_char: string,
-	_input: string,
-	_toIndex: number,
+	char: string,
+	input: string,
+	toIndex: number,
 ): number {
-	return 0;
+	return input.slice(0, toIndex).split(char).length - 1;
 }

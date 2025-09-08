@@ -34,5 +34,9 @@ suite("lineNumber", () => {
 		test("empty", () => {
 			expect(countOccurenceOfChar("o", "", 0)).toBe(0);
 		});
+
+		test("hello world", () => {
+			expect(countOccurenceOfChar("o", "hello world", 2)).toBe(0);
+		});
 	});
 });
