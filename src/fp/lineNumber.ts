@@ -16,3 +16,11 @@ export function getLineEndIndex(input: string, fromIndex: number) {
 
 	return index;
 }
+
+export function countOccurenceOfChar(
+	_char: string,
+	_input: string,
+	_toIndex: number,
+): number {
+	return 0;
+}

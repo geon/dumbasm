@@ -1,5 +1,9 @@
 import { suite, test, expect } from "vitest";
-import { getLineBeginIndex, getLineEndIndex } from "../lineNumber";
+import {
+	countOccurenceOfChar,
+	getLineBeginIndex,
+	getLineEndIndex,
+} from "../lineNumber";
 
 suite("lineNumber", () => {
 	suite("getLineBeginIndex", () => {
@@ -23,6 +27,12 @@ suite("lineNumber", () => {
 
 		test("newline", () => {
 			expect(getLineEndIndex("\n", 0)).toBe(0);
+		});
+	});
+
+	suite("countOccurenceOfChar", () => {
+		test("empty", () => {
+			expect(countOccurenceOfChar("o", "", 0)).toBe(0);
 		});
 	});
 });
