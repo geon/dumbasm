@@ -10,5 +10,9 @@ suite("lineNumber", () => {
 		test("after newline", () => {
 			expect(getLineBeginIndex("\n\n\n", 1)).toBe(1);
 		});
+
+		test("before newline", () => {
+			expect(getLineBeginIndex("\n\n\n", 0)).toBe(0);
+		});
 	});
 });
