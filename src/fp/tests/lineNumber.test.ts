@@ -1,5 +1,5 @@
 import { suite, test, expect } from "vitest";
-import { getLineBeginIndex } from "../lineNumber";
+import { getLineBeginIndex, getLineEndIndex } from "../lineNumber";
 
 suite("lineNumber", () => {
 	suite("getLineBeginIndex", () => {
@@ -13,6 +13,12 @@ suite("lineNumber", () => {
 
 		test("before newline", () => {
 			expect(getLineBeginIndex("\n\n\n", 0)).toBe(0);
+		});
+	});
+
+	suite("getLineEndIndex", () => {
+		test("empty", () => {
+			expect(getLineEndIndex("", 0)).toBe(undefined);
 		});
 	});
 });

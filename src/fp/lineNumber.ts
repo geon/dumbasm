@@ -7,3 +7,7 @@ export function getLineBeginIndex(input: string, fromIndex: number) {
 
 	return lastIndex + 1;
 }
+
+export function getLineEndIndex(_input: string, _fromIndex: number) {
+	return undefined;
+}
