@@ -18,6 +18,7 @@ import { parseWithErrorMessage } from "./combinators/parseWithErrorMessage.js";
 
 export type ParsedMos6502Instruction = {
 	readonly mnemonic: Mos6502Mnemonic;
+	// TODO: Rename to addressingMode?
 	readonly operand: ParsedMos6502AddressingMode | undefined;
 };
 
