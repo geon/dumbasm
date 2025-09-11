@@ -27,6 +27,14 @@ testExamples("lowerDumdasm", [
 			lda myLabel
 		`,
 	},
+	{
+		name: "conflicting variable name",
+		input: `
+			uint8 myVariable
+			uint8 myVariable
+		`,
+		result: undefined,
+	},
 ]);
 
 export type Example = Readonly<{

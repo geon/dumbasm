@@ -1,10 +1,61 @@
 import type { AsmFragment } from "./parsers/parseAsmLine.js";
 import type { DumbasmFragment } from "./parsers/parseDumbasmLine.js";
 import type { ParsedFile } from "./parsers/parseFile.js";
+import type { VariableLocation } from "./parsers/parseVariableLocation.js";
+
+type RegisterName = "A" | "X" | "Y";
+type VariableAllocation =
+	| { type: "reg"; reg: RegisterName }
+	| { type: "address"; address: number };
+type VariableAllocations = Record<string, VariableAllocation>;
+
+function allocateVariables(
+	fragments: ParsedFile,
+): VariableAllocations | undefined {
+	const variables: Record<
+		string,
+		{
+			readonly lineNum: number;
+			readonly location: VariableLocation | undefined;
+		}
+	> = {};
+
+	for (const fragment of fragments) {
+		if (fragment.type === "variableDeclaration") {
+			if (variables[fragment.value.name]) {
+				return undefined;
+			}
+			variables[fragment.value.name] = {
+				lineNum: fragment.value.lineNum,
+				location: fragment.value.location,
+			};
+			continue;
+		}
+	}
+
+	const allocations: Record<string, VariableAllocation> = {};
+
+	for (const [name, variable] of Object.entries(variables)) {
+		allocations[name] =
+			variable.location === "zeroPage" || variable.location === undefined
+				? { type: "address", address: 1234 }
+				: {
+						type: "reg",
+						reg: variable.location[3] as RegisterName,
+					};
+	}
+
+	return allocations;
+}
 
 export function lowerDumdasm(
 	fragments: ParsedFile,
 ): readonly AsmFragment[] | undefined {
+	const variables = allocateVariables(fragments);
+	if (!variables) {
+		return undefined;
+	}
+
 	const result: AsmFragment[] = [];
 
 	for (const fragment of fragments) {
