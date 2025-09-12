@@ -27,4 +27,25 @@ testExamples<ParsedFile>("parseFile", [
 			},
 		]),
 	},
+	{
+		name: "\\ninc\\ntax\\n\\n",
+		input: "\ninc\ntax\n\n",
+		parser: parseFile,
+		result: createParseResult(10, [
+			{
+				type: "instruction",
+				value: {
+					mnemonic: "inc",
+					operand: undefined,
+				},
+			},
+			{
+				type: "instruction",
+				value: {
+					mnemonic: "tax",
+					operand: undefined,
+				},
+			},
+		]),
+	},
 ]);
