@@ -1,8 +1,8 @@
-import { parseFile } from "../parseFile.js";
+import { parseFile, type ParsedFile } from "../parseFile.js";
 import { testExamples } from "../combinators/tests/testExamples.js";
 import { createParseError, createParseResult } from "../combinators/Parser.js";
 
-testExamples("parseFile", [
+testExamples<ParsedFile>("parseFile", [
 	{
 		input: "nonsense",
 		parser: parseFile,
@@ -13,5 +13,21 @@ testExamples("parseFile", [
 		input: "",
 		parser: parseFile,
 		result: createParseResult(0, []),
+	},
+	{
+		input: "tax",
+		parser: parseFile,
+		result: createParseResult(3, [
+			{
+				type: "instruction",
+				value: {
+					mnemonic: "tax",
+					addressingMode: {
+						type: "implied",
+						value: undefined,
+					},
+				},
+			},
+		]),
 	},
 ]);
