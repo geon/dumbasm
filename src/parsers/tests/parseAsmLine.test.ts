@@ -59,4 +59,20 @@ testExamples<readonly AsmFragment[]>("parseAsmLine", [
 			},
 		]),
 	},
+	{
+		input: "tax ; Comment",
+		parser: parseAsmLine,
+		result: createParseResult(13, [
+			{
+				type: "instruction",
+				value: {
+					mnemonic: "tax",
+					addressingMode: {
+						type: "implied",
+						value: undefined,
+					},
+				},
+			},
+		]),
+	},
 ]);
