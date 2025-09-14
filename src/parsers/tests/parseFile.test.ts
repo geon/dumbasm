@@ -1,6 +1,12 @@
 import { parseFile, type ParsedFile } from "../parseFile.js";
 import { testExamples } from "../combinators/tests/testExamples.js";
-import { createParseError, createParseResult } from "../combinators/Parser.js";
+import {
+	createParseError,
+	createParseResult,
+	parsingFailed,
+} from "../combinators/Parser.js";
+import { suite, test, expect } from "vitest";
+import { asmSamples } from "./asm-samples.js";
 
 testExamples<ParsedFile>("parseFile", [
 	{
@@ -64,3 +70,11 @@ testExamples<ParsedFile>("parseFile", [
 		result: createParseError(6, "SYNTAX ERROR"),
 	},
 ]);
+
+suite("parseFile", () => {
+	test("hello world", () => {
+		const parsed = parseFile(asmSamples.helloWorld, 0);
+		expect(parsingFailed(parsed)).toBe(false);
+		expect(parsed).toMatchSnapshot();
+	});
+});

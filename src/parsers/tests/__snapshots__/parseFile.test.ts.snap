@@ -1,0 +1,119 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`parseFile > hello world 1`] = `
+{
+  "consumed": 178,
+  "parsed": [
+    {
+      "type": "instruction",
+      "value": {
+        "addressingMode": {
+          "type": "immediate",
+          "value": 0,
+        },
+        "mnemonic": "ldy",
+      },
+    },
+    {
+      "type": "label",
+      "value": "loop",
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "addressingMode": {
+          "type": "indexed",
+          "value": {
+            "index": "Y",
+            "operand": {
+              "type": "identifier",
+              "value": "message",
+            },
+          },
+        },
+        "mnemonic": "lda",
+      },
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "addressingMode": {
+          "type": "address",
+          "value": {
+            "type": "identifier",
+            "value": "done",
+          },
+        },
+        "mnemonic": "beq",
+      },
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "addressingMode": {
+          "type": "address",
+          "value": {
+            "type": "number",
+            "value": 65490,
+          },
+        },
+        "mnemonic": "jsr",
+      },
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "addressingMode": {
+          "type": "implied",
+          "value": undefined,
+        },
+        "mnemonic": "iny",
+      },
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "addressingMode": {
+          "type": "address",
+          "value": {
+            "type": "identifier",
+            "value": "loop",
+          },
+        },
+        "mnemonic": "jmp",
+      },
+    },
+    {
+      "type": "label",
+      "value": "done",
+    },
+    {
+      "type": "instruction",
+      "value": {
+        "addressingMode": {
+          "type": "implied",
+          "value": undefined,
+        },
+        "mnemonic": "rts",
+      },
+    },
+    {
+      "type": "label",
+      "value": "message",
+    },
+    {
+      "type": "directive",
+      "value": ".byte 147 ; clear",
+    },
+    {
+      "type": "directive",
+      "value": ".text "HELLO WORLD"",
+    },
+    {
+      "type": "directive",
+      "value": ".byte 0 ; null terminator",
+    },
+  ],
+  "type": "result",
+}
+`;
