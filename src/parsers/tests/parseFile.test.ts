@@ -30,4 +30,31 @@ testExamples<ParsedFile>("parseFile", [
 			},
 		]),
 	},
+	{
+		name: "\\niny\\ntax\\n\\n",
+		input: "\niny\ntax\n\n",
+		parser: parseFile,
+		result: createParseResult(10, [
+			{
+				type: "instruction",
+				value: {
+					mnemonic: "iny",
+					addressingMode: {
+						type: "implied",
+						value: undefined,
+					},
+				},
+			},
+			{
+				type: "instruction",
+				value: {
+					mnemonic: "tax",
+					addressingMode: {
+						type: "implied",
+						value: undefined,
+					},
+				},
+			},
+		]),
+	},
 ]);
