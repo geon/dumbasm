@@ -26,9 +26,9 @@ const ca65Syntax = `
                 mymac   $20             ; Macro expansion
                 MySym = 3*L1            ; Symbol definition
         MaSym   = Label                 ; Another symbol
-`
+`;
 
 export const asmSamples = {
 	helloWorld,
-	ca65Syntax
+	ca65Syntax,
 };
