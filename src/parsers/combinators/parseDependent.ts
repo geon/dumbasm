@@ -1,4 +1,4 @@
-import { parsingFailed, type Parser } from "./Parser";
+import { createParseResult, parsingFailed, type Parser } from "./Parser";
 
 export function parseDependent<
 	const A,
@@ -18,6 +18,9 @@ export function parseDependent<
 			return parsedNext;
 		}
 
-		throw new Error("Not implemented.");
+		return createParseResult(
+			parsedDeterminant.consumed + parsedNext.consumed,
+			parsedNext.parsed,
+		);
 	}) as ReturnType<B>;
 }
