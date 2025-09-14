@@ -63,7 +63,7 @@ export function lowerDumdasm(
 			continue;
 		}
 
-		result.push(...lowerDumbasmFragment(fragment));
+		result.push(...lowerDumbasmFragment(fragment, variables));
 	}
 
 	return result;
@@ -74,10 +74,33 @@ function lowerDumbasmFragment(
 		| AsmFragment
 		| DumbasmFragment
 		| { readonly type: "scope"; readonly value: ParsedFile },
+	variables: VariableAllocations,
 ): readonly AsmFragment[] {
 	if (fragment.type === "variableDeclaration" || fragment.type === "scope") {
 		throw new Error("Not implemented.");
 	}
 
+	if (fragment.type === "instruction") {
+		if (fragment.value.mnemonic === "sta") {
+			const newFragment = lowerSta(fragment, variables);
+			return newFragment ? [newFragment] : [];
+		}
+	}
+
 	return [fragment];
+}
+
+function lowerSta(
+	fragment: Extract<AsmFragment, { type: "instruction" }>,
+	variables: VariableAllocations,
+): AsmFragment | undefined {
+	if (
+		fragment.value.addressingMode?.type === "address" &&
+		fragment.value.addressingMode.value.type === "identifier" &&
+		variables[fragment.value.addressingMode.value.value]
+	) {
+		return undefined;
+	}
+
+	return fragment;
 }
