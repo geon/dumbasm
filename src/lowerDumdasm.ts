@@ -99,8 +99,56 @@ function lowerSta(
 		fragment.value.addressingMode.value.type === "identifier" &&
 		variables[fragment.value.addressingMode.value.value]
 	) {
-		return undefined;
+		return lowerStaToVariable(
+			variables[fragment.value.addressingMode.value.value]!,
+		);
 	}
 
 	return fragment;
+}
+
+function lowerStaToVariable(
+	variable: VariableAllocation,
+): AsmFragment | undefined {
+	switch (variable.type) {
+		case "reg": {
+			switch (variable.reg) {
+				case "A": {
+					return undefined;
+				}
+
+				case "X": {
+					return {
+						type: "instruction",
+						value: {
+							mnemonic: "tax",
+							addressingMode: { type: "implied", value: undefined },
+						},
+					};
+				}
+
+				case "Y": {
+					return {
+						type: "instruction",
+						value: {
+							mnemonic: "tay",
+							addressingMode: { type: "implied", value: undefined },
+						},
+					};
+				}
+
+				default: {
+					return variable.reg satisfies never;
+				}
+			}
+		}
+
+		case "address": {
+			throw new Error("Not implemented.");
+		}
+
+		default: {
+			return variable satisfies never;
+		}
+	}
 }

@@ -43,6 +43,16 @@ testExamples("lowerDumdasm", [
 		`,
 		result: "",
 	},
+	{
+		name: "sta inX ",
+		input: `
+			regX uint8 inX
+			sta inX
+		`,
+		result: `
+			tax
+		`,
+	},
 ]);
 
 export type Example = Readonly<{
