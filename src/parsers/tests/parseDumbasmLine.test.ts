@@ -8,7 +8,7 @@ testExamples<DumbasmFragment>("parseDumbasmLine", [
 		parser: parseDumbasmLine,
 		result: createParseError(
 			0,
-			'No alternative matched.\n\tvariableDeclaration: Expected string "uint8".',
+			'No alternative matched.\n\tvariableDeclaration: Expected string "uint8".\n\tvariableLoad: Expected string \"ld\".',
 		),
 	},
 	{
@@ -17,7 +17,7 @@ testExamples<DumbasmFragment>("parseDumbasmLine", [
 		parser: parseDumbasmLine,
 		result: createParseError(
 			0,
-			'No alternative matched.\n\tvariableDeclaration: Expected string "uint8".',
+			'No alternative matched.\n\tvariableDeclaration: Expected string "uint8".\n\tvariableLoad: Expected string \"ld\".',
 		),
 	},
 	{

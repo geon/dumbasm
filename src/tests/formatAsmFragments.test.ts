@@ -34,7 +34,8 @@ export function testExamples(
 					const asmFragments = parsed.parsed.map((fragment) => {
 						if (
 							fragment.type === "variableDeclaration" ||
-							fragment.type === "scope"
+							fragment.type === "scope" ||
+							fragment.type === "variableLoad"
 						) {
 							throw new Error("Not implemented.");
 						}

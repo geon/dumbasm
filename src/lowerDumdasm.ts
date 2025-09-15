@@ -86,7 +86,11 @@ function lowerDumbasmFragment(
 		| { readonly type: "scope"; readonly value: ParsedFile },
 	variables: VariableAllocations,
 ): readonly AsmFragment[] {
-	if (fragment.type === "variableDeclaration" || fragment.type === "scope") {
+	if (
+		fragment.type === "variableDeclaration" ||
+		fragment.type === "scope" ||
+		fragment.type === "variableLoad"
+	) {
 		throw new Error("Not implemented.");
 	}
 

@@ -8,16 +8,26 @@ import {
 	parseVariableDeclaration,
 	type ParsedVariableDeclaration,
 } from "./parseVariableDeclaration.js";
+import {
+	parseVariableLoad,
+	type ParsedVariableLoad,
+} from "./parseVariableLoad.js";
 
-export type DumbasmFragment = {
-	readonly type: "variableDeclaration";
-	readonly value: ParsedVariableDeclaration;
-};
+export type DumbasmFragment =
+	| {
+			readonly type: "variableDeclaration";
+			readonly value: ParsedVariableDeclaration;
+	  }
+	| {
+			readonly type: "variableLoad";
+			readonly value: ParsedVariableLoad;
+	  };
 
 export const parseDumbasmLine: Parser<DumbasmFragment> = parseSequenceIndex(1, [
 	parseOptional(parseWhitespace),
 	parseKeyed({
 		variableDeclaration: parseVariableDeclaration,
+		variableLoad: parseVariableLoad,
 	}),
 	parseOptional(parseWhitespace),
 	parseOptional(parseComment),

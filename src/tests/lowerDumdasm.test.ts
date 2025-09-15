@@ -61,6 +61,18 @@ testExamples("lowerDumdasm", [
 		`,
 		result: undefined,
 	},
+	{
+		name: "scope",
+		input: `
+			{
+				regA uint8 foo
+			}
+			{
+				regA uint8 foo
+			}
+		`,
+		result: "",
+	},
 ]);
 
 export type Example = Readonly<{
