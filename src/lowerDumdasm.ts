@@ -86,11 +86,7 @@ function lowerDumbasmFragment(
 		| { readonly type: "scope"; readonly value: ParsedFile },
 	variables: VariableAllocations,
 ): readonly AsmFragment[] {
-	if (
-		fragment.type === "variableDeclaration" ||
-		fragment.type === "scope" ||
-		fragment.type === "variableLoad"
-	) {
+	if (fragment.type === "variableDeclaration" || fragment.type === "scope") {
 		throw new Error("Not implemented.");
 	}
 
@@ -99,6 +95,10 @@ function lowerDumbasmFragment(
 			const newFragment = lowerSta(fragment, variables);
 			return newFragment ? [newFragment] : [];
 		}
+	}
+
+	if (fragment.type === "variableLoad") {
+		return lowerVariableLoad(fragment, variables);
 	}
 
 	return [fragment];
@@ -165,4 +165,79 @@ function lowerStaToVariable(
 			return variable satisfies never;
 		}
 	}
+}
+
+function lowerVariableLoad(
+	fragment: Extract<DumbasmFragment, { type: "variableLoad" }>,
+	variables: VariableAllocations,
+): AsmFragment[] {
+	const variable = variables[fragment.value.variable];
+	if (!variable) {
+		throw new Error("Unknown variable: " + fragment.value.variable);
+	}
+
+	if (fragment.value.addressingMode.type === "immediate") {
+		if (variable.type === "reg") {
+			return [
+				{
+					type: "instruction",
+					value: {
+						mnemonic: (
+							{
+								A: "lda",
+								X: "ldx",
+								Y: "ldy",
+							} as const
+						)[variable.reg],
+						addressingMode: {
+							type: "immediate",
+							value: fragment.value.addressingMode.value,
+						},
+					},
+				},
+			];
+		}
+	}
+
+	if (fragment.value.addressingMode.type === "indexed") {
+		const source = variables[fragment.value.addressingMode.value.index];
+		if (!source) {
+			throw new Error(
+				"Unknown variable: " + fragment.value.addressingMode.value.index,
+			);
+		}
+
+		if (variable.type === "reg" && source.type === "reg") {
+			if (variable.reg === source.reg) {
+				return [];
+			}
+
+			if (source.reg === "A") {
+				if (variable.reg === "X") {
+					return [
+						{
+							type: "instruction",
+							value: {
+								mnemonic: "tax",
+								addressingMode: {
+									type: "implied",
+									value: undefined,
+								},
+							},
+						},
+					];
+				}
+			}
+		}
+
+		if (
+			variable.type === "reg" &&
+			variable.reg === "A" &&
+			source.type === "address"
+		) {
+			source.address;
+		}
+	}
+
+	return [];
 }

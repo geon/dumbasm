@@ -6,6 +6,8 @@ import {
 } from "../parsers/combinators/Parser.js";
 import { lowerDumdasm } from "../lowerDumdasm.js";
 import { getLineCol } from "../fp/lineNumber.js";
+import { asmSamples } from "../parsers/tests/asm-samples.js";
+import { dumbasmSamples } from "./dumbasm-samples.js";
 
 testExamples("lowerDumdasm", [
 	{
@@ -72,6 +74,11 @@ testExamples("lowerDumdasm", [
 			}
 		`,
 		result: "",
+	},
+	{
+		name: "variables sample",
+		input: dumbasmSamples.helloWorldWithVariablesOnly,
+		result: asmSamples.helloWorld,
 	},
 ]);
 
