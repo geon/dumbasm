@@ -22,4 +22,21 @@ testExamples<ParsedVariableLoad>("parseVariableLoad", [
 			},
 		}),
 	},
+	{
+		input: "ld myVariable myArray,myIndex",
+		parser: parseVariableLoad,
+		result: createParseResult(29, {
+			variable: "myVariable",
+			addressingMode: {
+				type: "indexed",
+				value: {
+					operand: {
+						type: "identifier",
+						value: "myArray",
+					},
+					index: "myIndex",
+				},
+			},
+		}),
+	},
 ]);
